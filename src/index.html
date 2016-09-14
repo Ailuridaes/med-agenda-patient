@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html ng-app="app" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>MedAgenda Doctor Application</title>
+
+  <!-- bower:css -->
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+  <link rel="stylesheet" href="bower_components/toastr/toastr.css" />
+  <!-- endbower -->
+  <!-- inject:css -->
+  <link rel="stylesheet" href="styles/style.css">
+  <!-- endinject -->
+</head>
+<body>
+  <div ng-include="'app/layout/navbar.html'"></div>
+
+
+  <ui-view></ui-view>
+
+
+
+  <!-- bower:js -->
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="bower_components/bootbox/bootbox.js"></script>
+  <script src="bower_components/ngBootbox/dist/ngBootbox.js"></script>
+  <script src="bower_components/toastr/toastr.js"></script>
+  <!-- endbower -->
+  <!-- inject:js -->
+  <script src="app/app.js"></script>
+  <script src="app/core/data.factory.js"></script>
+  <script src="app/core/values.js"></script>
+  <script src="app/feature/feature.controller.js"></script>
+  <!-- endinject -->
+</body>
+</html>

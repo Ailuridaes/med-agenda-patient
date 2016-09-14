@@ -1,0 +1,20 @@
+{
+  "name": "med-agenda-patient",
+  "version": "1.0.0",
+  "description": "Frontend doctor client for MedAgenda project",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": ""
+  },
+  "author": "Origin Code Academy Cohort 5.0",
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-connect": "^5.0.0",
+    "gulp-inject": "^4.1.0",
+    "gulp-livereload": "^3.8.1",
+    "gulp-open": "^2.0.0",
+    "gulp-util": "^3.0.7",
+    "wiredep": "^4.0.0"
+  }
+}

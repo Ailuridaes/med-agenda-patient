@@ -1,0 +1,31 @@
+{
+  "name": "med-agenda-patient",
+  "authors": [
+    "Origin Code Academy Cohort 5.0"
+  ],
+  "description": "Frontend patient client for MedAgenda project",
+  "main": "app/index.html",
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "./app/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.8",
+    "angular-ui-router": "^0.3.1",
+    "bootstrap": "^3.3.7",
+    "ngBootbox": "^0.1.3",
+    "toastr": "^2.1.3"
+  },
+  "overrides": {
+    "bootstrap": {
+      "main": ["dist/css/bootstrap.css"]
+    }
+  }
+}
