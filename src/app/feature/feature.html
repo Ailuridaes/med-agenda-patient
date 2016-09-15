@@ -23,7 +23,8 @@
                         <label>Email</label>
                         <input type="email" class="form-control" ng-model="feature.patient.email">
                     </div>
-                    <button class="btn btn-block btn-info" type="submit" ng-click="feature.evaluateIsNewUser()">Next</button>
+                    <button class="btn btn-block btn-info" type="submit" ng-disabled="feature.disabledValidationCheckIn()"
+                            ng-click="feature.evaluateIsNewUser()">Next</button>
                 </form>
             </div>
     	</div>
@@ -59,7 +60,8 @@
                         <label>Chronic Conditions - ie: Athsma, Diebetes, etc...</label>
                         <input type="text" class="form-control" ng-model="feature.patient.conditions">
                     </div>
-                    <button class="btn btn-block btn-info" type="submit" wz-next value="Continue">Next</button>
+                    <button class="btn btn-block btn-info" type="submit" ng-disabled="feature.disabledValidationPersonalInfo()"
+                            wz-next value="Continue">Next</button>
                 </form>
             </div>
     	</div>
@@ -99,7 +101,7 @@
                     	</select>
                     </div>
                     
-                    <button class="btn btn-block btn-info" type="submit" wz-next value="Continue">Next</button>
+                    <button class="btn btn-block btn-info" type="submit" ng-disabled="feature.disabledReasonForVisit()" wz-next value="Continue">Next</button>
                 </form>
             </div>
     	</div>
