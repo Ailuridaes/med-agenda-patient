@@ -13,7 +13,11 @@
         vm.title = "Feature Controller";
         vm.evaluateIsNewUser = evaluateIsNewUser;
         vm.writePatient = writePatient;
-        
+        vm.isReturningUser = false;
+        vm.disabledValidationCheckIn = disabledValidationCheckIn;
+        vm.disabledValidationPersonalInfo = disabledValidationPersonalInfo;
+        vm.disabledReasonForVisit = disabledReasonForVisit;
+
 
         vm.Patients = [
         {
@@ -26,7 +30,7 @@
             medications: 'Crazy Pills',
             conditions: 'Athsma, Crazy',
             symptom: 'Head Trauma',
-            painSeverity: '5'
+            painSeverity: '5',
 
         },
         {
@@ -39,7 +43,7 @@
             medications: 'Crazy Pills',
             conditions: 'Athsma, Crazy',
             symptom: 'Head Trauma',
-            painSeverity: '5'
+            painSeverity: '5',
 
         },
         {
@@ -80,11 +84,29 @@
            
         }
 
+
         function writePatient(isEditing) {
 
             alert('hi from write patient');
             
             
+        }
+
+
+        //Validation for disabling buttons
+        function disabledValidationCheckIn() {
+
+            return !(vm.patient !== undefined && vm.patient.firstName && vm.patient.lastName && vm.patient.email); 
+        }
+
+        function disabledValidationPersonalInfo() {
+
+            return !(vm.patient !== undefined && vm.patient.telephone && vm.patient.address && vm.patient.emergencyContactName && vm.patient.emergencyContactPhone
+                     && vm.patient.medications && vm.patient.conditions);
+        }
+
+        function disabledReasonForVisit() {
+            return !(vm.patient !== undefined && vm.patient.symptom && vm.patient.painSeverity);
         }
 
         
