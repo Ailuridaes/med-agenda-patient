@@ -17,6 +17,7 @@
         vm.disabledValidationCheckIn = disabledValidationCheckIn;
         vm.disabledValidationPersonalInfo = disabledValidationPersonalInfo;
         vm.disabledReasonForVisit = disabledReasonForVisit;
+        vm.reset = reset;
 
 
         vm.Patients = [
@@ -107,6 +108,12 @@
 
         function disabledReasonForVisit() {
             return !(vm.patient !== undefined && vm.patient.symptom && vm.patient.painSeverity);
+        }
+
+        function reset() {
+            
+            vm.patient = undefined;
+            WizardHandler.wizard().goTo('Check In');
         }
 
         
