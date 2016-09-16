@@ -113,24 +113,79 @@
             	
             	<div class="row">
 
-	            	<div class="col-md-4"><strong>First Name: </strong><div><p>{{feature.patient.firstName}}</p></div></div>
-	            	<div class="col-md-4"><strong>Last Name: </strong><div><p>{{feature.patient.lastName}}</p></div></div>
-	            	<div class="col-md-4"><strong>Email: </strong><div><p>{{feature.patient.email}}</p></div></div>
+	            	<div class="col-md-4">
+	            		<strong>First Name: </strong>
+	            		<div ng-click="isEditingFirst = true" >
+	            			<p  ng-hide="isEditingFirst">{{feature.patient.firstName}}</p>
+	            			<input ng-show="isEditingFirst" ng-model="feature.patient.firstName" ng-blur="feature.writePatient(); isEditingFirst = false">
+	            		</div>
+	            	</div>
+	            	<div class="col-md-4">
+	            		<strong>Last Name: </strong>
+	            		<div ng-click="isEditingLast = true" >
+	            			<p ng-hide="isEditingLast">{{feature.patient.lastName}}</p>
+	            			<input ng-show="isEditingLast" ng-model="feature.patient.lastName" ng-blur="feature.writePatient(); isEditingLast = false">
+            			</div>
+            		</div>
+	            	<div class="col-md-4">
+	            		<strong>Email: </strong>
+	            		<div ng-click="isEditingEmail = true" >
+	            			<p ng-hide="isEditingEmail">{{feature.patient.email}}</p>
+	            			<input ng-show="isEditingEmail" ng-model="feature.patient.email" ng-blur="feature.writePatient(); isEditingEmail = false">
+            			</div>
+	            	</div>
             	</div>
             	<hr>
             	<div class="row">
-            		<div class="col-md-6"><strong>Telephone: </strong><div><p>{{feature.patient.telephone}}</p></div></div>
-	            	<div class="col-md-6"><strong>Address: </strong><div><p>{{feature.patient.address}}</p></div></div>
+            		<div class="col-md-6">
+	            		<strong>Telephone: </strong>
+	            		<div ng-click="isEditingTelephone = true" >
+	            			<p ng-hide="isEditingTelephone">{{feature.patient.telephone}}</p>
+	            			<input ng-show="isEditingTelephone" ng-model="feature.patient.telephone" ng-blur="feature.writePatient(); isEditingTelephone = false">
+	            		</div>
+            		</div>
+	            	<div class="col-md-6">
+	            		<strong>Address: </strong>
+	            		<div ng-click="isEditingAddress = true" >
+	            			<p ng-hide="isEditingAddress">{{feature.patient.address}}</p>
+	            			<input ng-show="isEditingAddress" ng-model="feature.patient.address" ng-blur="feature.writePatient(); isEditingAddress = false">
+	            		</div>
+	            	</div>
 	            </div>
 	            <hr>
 	            <div class="row">
-	            	<div class="col-md-6"><strong>Emergency Contact: </strong><div><p>{{feature.patient.emergencyContactName}}</p></div></div>
-	            	<div class="col-md-6"><strong>EC Telephone: </strong><div><p>{{feature.patient.emergencyContactPhone}}</p></div></div>	
+	            	<div class="col-md-6">
+		            	<strong>Emergency Contact:</strong>
+		            	<div ng-click="isEditingEmergencyContact = true" >
+		            		<p ng-hide="isEditingEmergencyContact">{{feature.patient.emergencyContactName}}</p>
+		            		<input type="text" ng-show="isEditingEmergencyContact" ng-model="feature.patient.emergencyContactName" ng-blur="feature.writePatient(); isEditingEmergencyContact = false">
+		            	</div>
+	            	</div>
+	            	<div class="col-md-6">
+	            		<strong>EC Telephone: </strong>
+	            		<div ng-click="idEditingECPhone = true" ng-blur="feature.writePatient()">
+	            			<p ng-hide="idEditingECPhone">{{feature.patient.emergencyContactPhone}}</p>
+
+	            			<input type="text" ng-show="idEditingECPhone" ng-model="feature.patient.emergencyContactPhone" ng-blur="feature.writePatient(); idEditingECPhone = false">
+	            		</div>
+	            	</div>	
 	            </div>
 	            <hr>
 	             <div class="row">
-	            	<div class="col-md-6"><strong>Medications: </strong><div><p>{{feature.patient.medications}}</p></div></div>
-	            	<div class="col-md-6"><strong>Chronic Conditions: </strong><div><p>{{feature.patient.conditions}}</p></div></div>	
+	            	<div class="col-md-6">
+	            		<strong>Medications: </strong>
+	            		<div ng-click="isEditingMedications = true" >
+	            			<p ng-hide="isEditingMedications">{{feature.patient.medications}}</p>
+	            			<input ng-show="isEditingMedications" ng-model="feature.patient.medications" ng-blur="feature.writePatient(); isEditingMedications = false">
+            			</div>
+	            	</div>
+	            	<div class="col-md-6">
+	            		<strong>Chronic Conditions: </strong>
+	            		<div ng-click="isEditingConditions = true" >
+	            			<p ng-hide="isEditingConditions">{{feature.patient.conditions}}</p>
+	            			<input ng-show="isEditingConditions" ng-model="feature.patient.conditions" ng-blur="feature.writePatient(); isEditingConditions = false">
+	            		</div>
+	            	</div>	
 	            </div>
             </div>
     	</div>

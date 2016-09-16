@@ -12,7 +12,7 @@
         var vm = this;
         vm.title = "Feature Controller";
         vm.evaluateIsNewUser = evaluateIsNewUser;
-        vm.isReturningUser = false;
+        vm.writePatient = writePatient;
         
 
         vm.Patients = [
@@ -60,8 +60,6 @@
 
         function evaluateIsNewUser() {
 
-            alert('hi');
-
             var currentPatient  = angular.copy(vm.patient);
 
             console.log(currentPatient);
@@ -73,14 +71,20 @@
                 }
             })
 
-           console.log(vm.isReturningUser);
-
+           
            if(vm.isReturningUser) {
             WizardHandler.wizard().goTo('Reason for Visit');
            } else {
             WizardHandler.wizard().goTo('Personal Info');
            }
            
+        }
+
+        function writePatient(isEditing) {
+
+            alert('hi from write patient');
+            
+            
         }
 
         
