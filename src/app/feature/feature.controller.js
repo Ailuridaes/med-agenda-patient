@@ -13,7 +13,6 @@
         vm.title = "Feature Controller";
         vm.evaluateIsNewUser = evaluateIsNewUser;
         vm.isReturningUser = false;
-        
 
         vm.Patients = [
         {
@@ -58,6 +57,9 @@
 
         ]
 
+
+        //////////
+
         function evaluateIsNewUser() {
 
             alert('hi');
@@ -82,7 +84,6 @@
            }
            
         }
-
         
     }
 })();
