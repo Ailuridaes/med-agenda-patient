@@ -62,8 +62,6 @@
 
         function evaluateIsNewUser() {
 
-            alert('hi');
-
             var currentPatient  = angular.copy(vm.patient);
 
             console.log(currentPatient);
