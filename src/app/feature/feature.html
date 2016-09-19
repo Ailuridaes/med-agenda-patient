@@ -25,7 +25,7 @@
                         <input type="email" class="form-control" ng-model="feature.patient.email">
                     </div>
                     <button class="btn btn-block btn-info" type="submit" ng-disabled="feature.disabledValidationCheckIn()"
-                            ng-click="feature.evaluateIsNewUser()">Next</button>
+                            ng-click="feature.returningPatientCheck(feature.patient.firstName, feature.patient.lastName, feature.patient.email)">Next</button>
                 </form>
             </div>
     	</div>
@@ -37,33 +37,51 @@
                 <button class="btn btn-warning btn-md pull-right" ng-click="feature.reset()">Reset</button>
             </div>
             <div class="panel-body">
+
                 <form>
+                    
                     <div class="form-group">
-                        <label>Telephone</label>
+                    <h4><label>Date of Birth</label></h4>
+                        <input type="date" class="form-control" ng-model="feature.patient.dateOfBirth">
+                    </div>
+                       
+                        
+                    
+                    <div class="form-group">
+                        <h4><label>Telephone</label></h4>
                         <input type="text" class="form-control" ng-model="feature.patient.telephone">
                     </div>
                     <div class="form-group">
-                        <label>Address</label>
+                        <h4><label>Address</label></h4>
                         <input type="text" class="form-control" ng-model="feature.patient.address">
                     </div>
-                    <div class="form-group">
-                        <label>Emergency Contact</label>
-                        <input type="text" class="form-control" ng-model="feature.patient.emergencyContactName">
+                    <h4><label>Emergency Contact</label></h4>
+                    <div class="form-group col-md-offset-1">
+                        <label>First Name</label>
+                        <input type="text" class="form-control" ng-model="feature.emergencyContact.firstName">
+                    </div>
+                    <div class="form-group col-md-offset-1">
+                        <label>Last Name</label>
+                        <input type="text" class="form-control" ng-model="feature.emergencyContact.lastName">
+                    </div>
+                    <div class="form-group col-md-offset-1">
+                        <label>Telephone</label>
+                        <input type="text" class="form-control" ng-model="feature.emergencyContact.telephone">
                     </div>
                     <div class="form-group">
-                        <label>Emergency Contact Telephone</label>
-                        <input type="text" class="form-control" ng-model="feature.patient.emergencyContactPhone">
-                    </div>
-                    <div class="form-group">
-                        <label>Medications</label>
+                        <h4><label>Medications</label></h4>
                         <input type="text" class="form-control" ng-model="feature.patient.medications">
                     </div>
                     <div class="form-group">
-                        <label>Chronic Conditions - ie: Athsma, Diebetes, etc...</label>
-                        <input type="text" class="form-control" ng-model="feature.patient.conditions">
+                        <h4><label>Chronic Conditions - ie: Asthma, Diabetes, etc...</label></h4>
+                        <input type="text" class="form-control" ng-model="feature.patient.chronicConditions">
+                    </div>
+                    <div class="form-group">
+                        <h4><label>Allergies</label></h4>
+                        <input type="text" class="form-control" ng-model="feature.patient.allergies">
                     </div>
                     <button class="btn btn-block btn-info" type="submit" ng-disabled="feature.disabledValidationPersonalInfo()"
-                            wz-next value="Continue">Next</button>
+                            wz-next value="Continue" ng-click="feature.setEmergencyContactToPatient()">Next</button>
                 </form>
             </div>
     	</div>
@@ -120,82 +138,109 @@
             	<div class="row">
 
 	            	<div class="col-md-4">
-	            		<strong>First Name: </strong>
+	            		<h4>First Name: </h4>
 	            		<div ng-click="isEditingFirst = true" >
 	            			<p  ng-hide="isEditingFirst">{{feature.patient.firstName}}</p>
-	            			<input ng-show="isEditingFirst" ng-model="feature.patient.firstName" ng-blur="feature.writePatient(); isEditingFirst = false">
+	            			<input ng-show="isEditingFirst" ng-model="feature.patient.firstName" ng-blur="isEditingFirst = false">
 	            		</div>
 	            	</div>
 	            	<div class="col-md-4">
-	            		<strong>Last Name: </strong>
+	            		<h4>Last Name: </h4>
 	            		<div ng-click="isEditingLast = true" >
 	            			<p ng-hide="isEditingLast">{{feature.patient.lastName}}</p>
-	            			<input ng-show="isEditingLast" ng-model="feature.patient.lastName" ng-blur="feature.writePatient(); isEditingLast = false">
+	            			<input ng-show="isEditingLast" ng-model="feature.patient.lastName" ng-blur="isEditingLast = false">
             			</div>
             		</div>
 	            	<div class="col-md-4">
-	            		<strong>Email: </strong>
+	            		<h4>Email: </h4>
 	            		<div ng-click="isEditingEmail = true" >
 	            			<p ng-hide="isEditingEmail">{{feature.patient.email}}</p>
-	            			<input ng-show="isEditingEmail" ng-model="feature.patient.email" ng-blur="feature.writePatient(); isEditingEmail = false">
+	            			<input ng-show="isEditingEmail" ng-model="feature.patient.email" ng-blur="isEditingEmail = false">
             			</div>
 	            	</div>
             	</div>
             	<hr>
             	<div class="row">
-            		<div class="col-md-6">
-	            		<strong>Telephone: </strong>
+            		<div class="col-md-4">
+	            		<h4>Telephone: </h4>
 	            		<div ng-click="isEditingTelephone = true" >
 	            			<p ng-hide="isEditingTelephone">{{feature.patient.telephone}}</p>
-	            			<input ng-show="isEditingTelephone" ng-model="feature.patient.telephone" ng-blur="feature.writePatient(); isEditingTelephone = false">
+	            			<input ng-show="isEditingTelephone" ng-model="feature.patient.telephone" ng-blur="isEditingTelephone = false">
 	            		</div>
             		</div>
-	            	<div class="col-md-6">
-	            		<strong>Address: </strong>
+	            	<div class="col-md-4">
+	            		<h4>Address: </h4>
 	            		<div ng-click="isEditingAddress = true" >
 	            			<p ng-hide="isEditingAddress">{{feature.patient.address}}</p>
-	            			<input ng-show="isEditingAddress" ng-model="feature.patient.address" ng-blur="feature.writePatient(); isEditingAddress = false">
+	            			<input ng-show="isEditingAddress" ng-model="feature.patient.address" ng-blur="isEditingAddress = false">
 	            		</div>
 	            	</div>
+                    <div class="col-md-4">
+                        <h4>Date of Birth: </h4>
+                        <div ng-click="isEditingBirthDay = true" >
+                            <p ng-hide="isEditingBirthDay">{{feature.patient.dateOfBirth}}</p>
+                            <inputn type="date" g-show="isEditingBirthDay" ng-model="feature.patient.dateOfBirth" ng-blur="isEditingBirthDay = false">
+                        </div>
+                    </div>
 	            </div>
 	            <hr>
+                <div class="row">
+                    <h4 class="text-center">Emergency Contact Info</h4>
+                    <hr>
+                </div>
 	            <div class="row">
-	            	<div class="col-md-6">
-		            	<strong>Emergency Contact:</strong>
-		            	<div ng-click="isEditingEmergencyContact = true" >
-		            		<p ng-hide="isEditingEmergencyContact">{{feature.patient.emergencyContactName}}</p>
-		            		<input type="text" ng-show="isEditingEmergencyContact" ng-model="feature.patient.emergencyContactName" ng-blur="feature.writePatient(); isEditingEmergencyContact = false">
-		            	</div>
+                
+	            	<div class="col-md-10 col-md-offset-1">
+                        
+		            	<table class="table">
+                            <thead>
+                                <tr>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Phone Number</th>
+                                </tr>
+                            </thead>     
+                            <tbody>
+                                <tr ng-repeat="contact in feature.patient.emergencyContacts">
+                                    <td ng-click="isEditingECFirstName = true">
+                                        <div ng-hide="isEditingECFirstName">{{contact.firstName}}</div>
+                                        <input type="text" ng-model="contact.firstName" ng-show="isEditingECFirstName" ng-blur="feature.editECArray(contact); isEditingECFirstName = false">
+                                    </td>
+                                     <td ng-click="isEditingECLastName = true">
+                                        <div ng-hide="isEditingECLastName">{{contact.lastName}}</div>
+                                        <input type="text" ng-model="contact.lastName" ng-show="isEditingECLastName" ng-blur="feature.editECArray(contact); isEditingECLastName = false">
+                                    </td>
+                                    <td ng-click="isEditingECTelephone = true">
+                                        <div ng-hide="isEditingECTelephone">{{contact.telephone}}</div>
+                                        <input type="text" ng-model="contact.telephone" ng-show="isEditingECTelephone" ng-blur="feature.editECArray(contact); isEditingECTelephone = false">
+                                    </td>
+                                   
+                                </tr>
+                            </tbody>    
+                        </table>
 	            	</div>
-	            	<div class="col-md-6">
-	            		<strong>EC Telephone: </strong>
-	            		<div ng-click="idEditingECPhone = true" ng-blur="feature.writePatient()">
-	            			<p ng-hide="idEditingECPhone">{{feature.patient.emergencyContactPhone}}</p>
-
-	            			<input type="text" ng-show="idEditingECPhone" ng-model="feature.patient.emergencyContactPhone" ng-blur="feature.writePatient(); idEditingECPhone = false">
-	            		</div>
-	            	</div>	
+	            	
 	            </div>
 	            <hr>
 	             <div class="row">
 	            	<div class="col-md-6">
-	            		<strong>Medications: </strong>
+	            		<h4>Medications: </h4>
 	            		<div ng-click="isEditingMedications = true" >
 	            			<p ng-hide="isEditingMedications">{{feature.patient.medications}}</p>
-	            			<input ng-show="isEditingMedications" ng-model="feature.patient.medications" ng-blur="feature.writePatient(); isEditingMedications = false">
+	            			<input ng-show="isEditingMedications" ng-model="feature.patient.medications" ng-blur="isEditingMedications = false">
             			</div>
 	            	</div>
 	            	<div class="col-md-6">
-	            		<strong>Chronic Conditions: </strong>
+	            		<h4>Chronic Conditions: </h4>
 	            		<div ng-click="isEditingConditions = true" >
-	            			<p ng-hide="isEditingConditions">{{feature.patient.conditions}}</p>
-	            			<input ng-show="isEditingConditions" ng-model="feature.patient.conditions" ng-blur="feature.writePatient(); isEditingConditions = false">
+	            			<p ng-hide="isEditingConditions">{{feature.patient.chronicConditions}}</p>
+	            			<input ng-show="isEditingConditions" ng-model="feature.patient.chronicConditions" ng-blur="isEditingConditions = false">
 	            		</div>
 	            	</div>	
 	            </div>
             </div>
     	</div>
-    	<button class="btn btn-block btn-info" type="submit" wz-next value="Continue">Submit</button>
+    	<button class="btn btn-block btn-info" type="submit" wz-next value="Continue" ng-click="feature.writePatientToDatabase()">Submit</button>
     </wz-step>
 
 </wizard>
