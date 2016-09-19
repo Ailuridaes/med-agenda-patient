@@ -3,42 +3,46 @@
 
     angular
         .module('app')
-        .factory('dataFactory', dataFactory);
+        .factory('patientFactory', patientFactory);
 
-    dataFactory.$inject = ['$http', '$q', 'apiUrl'];
+    patientFactory.$inject = ['$http', '$q', 'apiUrl'];
 
     /* @ngInject */
-    function dataFactory($http, $q, apiUrl) {
+    function patientFactory($http, $q, apiUrl) {
         var service = {
-            addData: addData,
+            addPatient: addPatient,
             getDataList: getDataList,
             getDatum: getDatum,
-            updateData: updateData,
-            deleteData: deleteData
+            updatePatient: updatePatient,
+            deleteData: deleteData,
+            isReturningPatient, isReturningPatient
         };
 
-        var dataUrl = apiUrl + 'data'
+        var dataUrl = apiUrl + 'patients'
 
         return service;
 
-        function addData(data) {
+        function addPatient(patient) {
 
-            var defer = $q.defer();
 
-            $http({
-                method: 'POST',
-                url: dataUrl,
-                data: data
-            }).then(
-                function(res) {
-                    // returns added data
-                    var data = angular.fromJson(res.data);
-                    defer.resolve(data);
-                }, function(res) {
-                    defer.reject(res);
-                }
-            );
-            return defer.promise;
+            return $http.post('http://localhost:61490/api/patients', patient);
+
+            // var defer = $q.defer();
+
+            // $http({
+            //     method: 'POST',
+            //     url: dataUrl,
+            //     data: data
+            // }).then(
+            //     function(res) {
+            //         // returns added data
+            //         var data = angular.fromJson(res);
+            //         defer.resolve(data);
+            //     }, function(res) {
+            //         defer.reject(res);
+            //     }
+            // );
+            // return defer.promise;
         }
 
         function getDataList() {
@@ -75,12 +79,12 @@
             return defer.promise;
         }
 
-        function updateData(data) {
+        function updatePatient(data, id) {
             var defer = $q.defer();
 
             $http({
                 method: 'PUT',
-                url: dataUrl,
+                url: dataUrl + '/' + id,
                 data: data
             }).then(
                 function(res) {
@@ -110,5 +114,24 @@
 
             return defer.promise;
         }
+
+        function isReturningPatient(firstName, lastName, email) {
+          var defer = $q.defer();
+
+            $http({
+                method: 'GET',
+                url: apiUrl + 'patients/isreturning/' + firstName + '/' + lastName + '/' + email + '/'
+            }).then(
+                function(res) {
+                    defer.resolve(res.data);
+                }, function(res) {
+                    defer.reject(res.statusText);
+                }
+            );
+
+            return defer.promise;  
+          
+        }
     }
 })();
+

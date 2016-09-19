@@ -1,46 +1,52 @@
-  <!DOCTYPE html>
+<<<<<<< HEAD
+<!DOCTYPE html>
 <html ng-app="app" lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>MedAgenda Doctor Application</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MedAgenda Doctor Application</title>
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/toastr/toastr.css" />
+    <link rel="stylesheet" href="bower_components/angular-wizard/dist/angular-wizard.min.css" />
+    <link rel="stylesheet" href="bower_components/seiyria-bootstrap-slider/dist/css/bootstrap-slider.css" />
+    <!-- endbower -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="styles/style.css">
+    <!-- endinject -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
 
-  <!-- bower:css -->
-  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
-  <link rel="stylesheet" href="bower_components/toastr/toastr.css" />
-  <link rel="stylesheet" href="bower_components/angular-wizard/dist/angular-wizard.min.css" />
-  <!-- endbower -->
-  <!-- inject:css -->
-  <link rel="stylesheet" href="styles/style.css">
-  <!-- endinject -->
+
 </head>
+
 <body>
-  <div ng-include="'app/layout/navbar.html'"></div>
-
-  <div class="container">
+    <div ng-include="'app/layout/navbar.html'"></div>
+      <div class="container">
     
-    <ui-view></ui-view>
+        <ui-view></ui-view>
 
-  </div>
-  
+      </div>
+    
+    <!-- bower:js -->
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/bootbox/bootbox.js"></script>
+    <script src="bower_components/ngBootbox/dist/ngBootbox.js"></script>
+    <script src="bower_components/toastr/toastr.js"></script>
+    <script src="bower_components/angular-wizard/dist/angular-wizard.min.js"></script>
+    <script src="bower_components/seiyria-bootstrap-slider/dist/bootstrap-slider.js"></script>
+    <!-- endbower -->
+    <!-- inject:js -->
+    <script src="app/app.js"></script>
+    <script src="app/core/emergencyContact.factory.js"></script>
+    <script src="app/core/patient.factory.js"></script>
+    <script src="app/core/values.js"></script>
+    <script src="app/feature/feature.controller.js"></script>
+    <!-- endinject -->
 
-
-
-  <!-- bower:js -->
-  <script src="bower_components/angular/angular.js"></script>
-  <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-  <script src="bower_components/jquery/dist/jquery.js"></script>
-  <script src="bower_components/bootbox/bootbox.js"></script>
-  <script src="bower_components/ngBootbox/dist/ngBootbox.js"></script>
-  <script src="bower_components/toastr/toastr.js"></script>
-  <script src="bower_components/angular-wizard/dist/angular-wizard.min.js"></script>
-  <!-- endbower -->
-  <!-- inject:js -->
-  <script src="app/app.js"></script>
-  <script src="app/core/data.factory.js"></script>
-  <script src="app/core/values.js"></script>
-  <script src="app/feature/feature.controller.js"></script>
-  <!-- endinject -->
 </body>
+
 </html>

@@ -1,8 +1,55 @@
+<<<<<<< HEAD
 body {
   margin-top: 120px;
 }
 
+#ex1Slider .slider-selection {
+	background: #BABABA;
+}
+
+#ex1Slider {
+	width: 886px;
+}
+
+.table td {
+   text-align: center; 
+   border: none !important;
+   border-style: none !important;
+}
+
+.pain-image {
+	width: 80%;
+}
+.pain-image.selected {
+	border-radius: 100%;
+	-webkit-box-shadow: 0px 0px 10px 0px rgba(66,138,202,1);
+	-moz-box-shadow: 0px 0px 10px 0px rgba(66,138,202,1);
+	box-shadow: 0px 0px 10px 0px rgba(66,138,202,1);
+}
+
+.strong {
+	font-weight: bold;
+}
+
+.meda {
+	font-family: Helvetica !important;
+	font-size: 20px !important; 
+	font-weight: 900 !important; 
+	color: black !important;
+	padding: 7px;
+}
+
+.ico  {
+	font-size: 20px !important; 
+	font-weight: 900 !important; 
+	color: #000099 !important;
+}
+
+body {
+    background-color: #323232;
+  	margin-top: 120px;
+}
+
 .btn-warning {
 	padding: 1px 16px; 
-
 }
