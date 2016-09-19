@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html ng-app="app" lang="en">
 
@@ -22,7 +23,11 @@
 
 <body>
     <div ng-include="'app/layout/navbar.html'"></div>
-    <ui-view></ui-view>
+      <div class="container">
+    
+        <ui-view></ui-view>
+
+      </div>
     
     <!-- bower:js -->
     <script src="bower_components/angular/angular.js"></script>
@@ -36,7 +41,8 @@
     <!-- endbower -->
     <!-- inject:js -->
     <script src="app/app.js"></script>
-    <script src="app/core/data.factory.js"></script>
+    <script src="app/core/emergencyContact.factory.js"></script>
+    <script src="app/core/patient.factory.js"></script>
     <script src="app/core/values.js"></script>
     <script src="app/feature/feature.controller.js"></script>
     <!-- endinject -->
