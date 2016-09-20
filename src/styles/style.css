@@ -42,7 +42,7 @@ body {
 .ico  {
 	font-size: 20px !important; 
 	font-weight: 900 !important; 
-	color: #000099 !important;
+	color: #0080ff !important;
 }
 
 body {
@@ -52,4 +52,27 @@ body {
 
 .btn-warning {
 	padding: 1px 16px; 
+}
+
+#nshadow {
+	-webkit-box-shadow: 0px 22px 86px -20px rgba(0,0,0,0.75) !important;
+	-moz-box-shadow: 0px 22px 86px -20px rgba(0,0,0,0.75) !important;
+	box-shadow: 0px 22px 86px -20px rgba(0,0,0,0.75) !important;
+}
+
+.padx {
+	padding: 2rem 35rem;
+}
+
+.lilpad {
+	padding: 2rem 4rem;
+}
+
+.special {
+	padding-top: 50px !important;
+}
+
+.login {
+	max-width: 350px;
+	align-content: center;
 }
