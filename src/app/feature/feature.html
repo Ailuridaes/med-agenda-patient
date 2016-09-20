@@ -21,10 +21,10 @@
                                 <label>Email</label>
                                 <input type="email" class="form-control" ng-model="feature.patient.email">
                             </div>
-                            <button class="btn btn-primary pull-right" type="submit" ng-disabled="feature.disabledValidationCheckIn()"
+                            <button class="btn btn-primary pull-right custom" type="submit" ng-disabled="feature.disabledValidationCheckIn()"
                                     ng-click="feature.returningPatientCheck(feature.patient.firstName, feature.patient.lastName, feature.patient.email)">Continue</button>
                         </form>
-                        <button class="btn btn-danger pull-left" ng-click="feature.reset()">Reset</button>
+                        <button class="btn btn-danger pull-left custom" ng-click="feature.reset()">Reset</button>
                     </div>
                 </div>
                 <br>
@@ -79,9 +79,9 @@
                                 <input type="text" class="form-control" ng-model="feature.patient.allergies">
                             </div>
                             
-                            <button class="btn btn-primary pull-right" type="submit" ng-disabled="feature.disabledValidationPersonalInfo()" wz-next value="Continue" ng-click="feature.setEmergencyContactToPatient()">Continue</button>
+                            <button class="btn btn-primary pull-right custom" type="submit" ng-disabled="feature.disabledValidationPersonalInfo()" wz-next value="Continue" ng-click="feature.setEmergencyContactToPatient()">Continue</button>
                         </form>
-                        <button class="btn btn-danger pull-left" ng-click="feature.reset()">Reset</button>
+                        <button class="btn btn-danger pull-left custom" ng-click="feature.reset()">Reset</button>
                     </div>
                 </div>
             </wz-step>
@@ -126,9 +126,9 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <button class="btn btn-primary pull-right" type="submit" wz-next value="Continue">Continue</button>
+                            <button class="btn btn-primary pull-right custom" type="submit" wz-next value="Continue">Continue</button>
                         </form>
-                    <button class="btn btn-danger pull-left" ng-click="feature.reset()">Reset</button>
+                    <button class="btn btn-danger pull-left custom" ng-click="feature.reset()">Reset</button>
                     </div>
                 </div>
             </wz-step>
