@@ -88,7 +88,7 @@
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         How are you feeling today?
-                        <button class="btn btn-warning btn-md pull-right" ng-click="feature.reset()">Reset</button>
+                        <button class="btn btn-danger btn-xs pull-right" ng-click="feature.reset()">Reset</button>
                     </div>
                     <div class="panel-body lilpad">
                         <form>
@@ -135,7 +135,7 @@
                 <div class="panel panel-info">
                     <div class="panel-heading">
                         Is this information correct?
-                        <button class="btn btn-warning btn-md pull-right" ng-click="feature.reset()">Reset</button>
+                        <button class="btn btn-danger btn-xs pull-right" ng-click="feature.reset()">Reset</button>
                     </div>
                     <div class="panel-body lilpad">
                         <div class="row">
@@ -181,7 +181,7 @@
                                 <h4>Date of Birth: </h4>
                                 <div ng-click="isEditingBirthDay = true">
                                     <p ng-hide="isEditingBirthDay">{{feature.patient.dateOfBirth}}</p>
-                                    <inputn type="datetime" g-show="isEditingBirthDay" ng-model="feature.patient.dateOfBirth" ng-blur="isEditingBirthDay = false">
+                                    <input type="datetime" ng-show="isEditingBirthDay" ng-model="feature.patient.dateOfBirth" ng-blur="isEditingBirthDay = false">
                                 </div>
                             </div>
                         </div>

@@ -41,10 +41,10 @@
             function(res) {
 
                 vm.isReturningPatient = res;
-                console.log(res);
+                
                 if(res) {
                 
-                    console.log(res);
+                    
 
                     vm.patient = res;
                     WizardHandler.wizard().goTo('Reason for Visit');
@@ -66,9 +66,9 @@
         }
 
         function setEmergencyContactToPatient() {
-            console.log(vm.emergencyContact);
+            
             vm.patient.emergencyContacts.push(vm.emergencyContact);
-            console.log(vm.patient.emergencyContacts);
+            
 
         } 
 
@@ -105,7 +105,7 @@
             vm.hideIndicators = true;
 
             if (vm.patient.patientId) {
-                console.log(vm.patient.patientId);
+                
 
                 patientFactory.updatePatient(vm.patient, vm.patient.patientId).then(
                     function() {
@@ -132,13 +132,6 @@
                 
 
                 var patient = angular.copy(vm.patient);
-
-                //This line rights over date to prevent invalid date format from being submitted to the database
-                //Will correct by adding date time picker for birthday.
-                
-                console.log(patient);
-
-                console.log(patient)
                 patientFactory.addPatient(patient).then(
                     function() {
                         console.log('added to database');
