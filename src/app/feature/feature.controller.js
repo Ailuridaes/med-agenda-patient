@@ -65,8 +65,9 @@
         }
 
         function setEmergencyContactToPatient() {
-            
+            console.log(vm.emergencyContact);
             vm.patient.emergencyContacts.push(vm.emergencyContact);
+            console.log(vm.patient.emergencyContacts);
 
         } 
 
