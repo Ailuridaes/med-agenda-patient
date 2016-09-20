@@ -5,10 +5,10 @@
         .module('app')
         .controller('FeatureController', FeatureController);
 
-    FeatureController.$inject = ['patientFactory', 'emergencyContactFactory', 'WizardHandler'];
+    FeatureController.$inject = ['patientFactory', 'emergencyContactFactory', 'WizardHandler', '$timeout'];
 
     /* @ngInject */
-    function FeatureController(patientFactory, emergencyContactFactory, WizardHandler) {
+    function FeatureController(patientFactory, emergencyContactFactory, WizardHandler, $timeout) {
         var vm = this;
         vm.title = "Feature Controller";
         vm.returningPatientCheck = returningPatientCheck;
@@ -95,7 +95,7 @@
 
             vm.patient = undefined;
             vm.emergencyContact = undefined;
-            WizardHandler.wizard().goTo('Check In');
+            WizardHandler.wizard().reset();
         }
 
         function writePatientToDatabase() {
@@ -103,6 +103,7 @@
             
 
             if (vm.patient.patientId) {
+                console.log(vm.patient.patientId);
 
                 patientFactory.updatePatient(vm.patient, vm.patient.patientId).then(
                     function() {
@@ -146,6 +147,11 @@
                     }
                 );
             }
+
+            $timeout(function() {
+                console.log('timeout executing now.')
+                reset();
+            }, 10000);
 
         }
 
