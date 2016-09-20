@@ -5,10 +5,10 @@
         .module('app')
         .controller('FeatureController', FeatureController);
 
-    FeatureController.$inject = ['patientFactory', 'emergencyContactFactory', 'WizardHandler'];
+    FeatureController.$inject = ['patientFactory', 'emergencyContactFactory', 'WizardHandler', '$timeout'];
 
     /* @ngInject */
-    function FeatureController(patientFactory, emergencyContactFactory, WizardHandler) {
+    function FeatureController(patientFactory, emergencyContactFactory, WizardHandler, $timeout) {
         var vm = this;
         vm.title = "Feature Controller";
         vm.returningPatientCheck = returningPatientCheck;
@@ -34,20 +34,21 @@
        
 
 
-        function returningPatientCheck(firstName, lastName, email) {
-            
-            
+        function returningPatientCheck(firstName, lastName, email) {      
             
            patientFactory.isReturningPatient(firstName, lastName, email).then(
             function(res) {
+
                 vm.isReturningPatient = res;
+                console.log(res);
                 if(res) {
-                    
+                
+                    console.log(res);
+
                     vm.patient = res;
                     WizardHandler.wizard().goTo('Reason for Visit');
 
                 } else {
-                    
 
                     WizardHandler.wizard().goTo('Personal Info');
                 }
@@ -93,7 +94,8 @@
         function reset() {
 
             vm.patient = undefined;
-            WizardHandler.wizard().goTo('Check In');
+            vm.emergencyContact = undefined;
+            WizardHandler.wizard().reset();
         }
 
         function writePatientToDatabase() {
@@ -101,6 +103,7 @@
             
 
             if (vm.patient.patientId) {
+                console.log(vm.patient.patientId);
 
                 patientFactory.updatePatient(vm.patient, vm.patient.patientId).then(
                     function() {
@@ -137,12 +140,18 @@
                 patientFactory.addPatient(patient).then(
                     function() {
                         console.log('added to database');
+
                     },
                     function(error) {
                         console.log(error);
                     }
                 );
             }
+
+            $timeout(function() {
+                console.log('timeout executing now.')
+                reset();
+            }, 10000);
 
         }
 
