@@ -82,3 +82,7 @@ body {
 	max-width: 350px;
 	align-content: center;
 }
+
+.custom {
+	width: 100px !important;
+}

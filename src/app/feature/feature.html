@@ -6,7 +6,6 @@
                 <div class="panel panel-default login col-md-offset-4" id="cshadow">
                     <div class="panel-heading">
                         Please, enter your information to continue.
-                        <button class="btn btn-danger btn-xs pull-right" ng-click="feature.reset()">Reset</button>
                     </div>
                     <div class="panel-body">
                         <form>
@@ -22,9 +21,10 @@
                                 <label>Email</label>
                                 <input type="email" class="form-control" ng-model="feature.patient.email">
                             </div>
-                            <button class="btn btn-primary" type="submit" ng-disabled="feature.disabledValidationCheckIn()"
-                                    ng-click="feature.returningPatientCheck(feature.patient.firstName, feature.patient.lastName, feature.patient.email)">Next</button>
+                            <button class="btn btn-primary pull-right" type="submit" ng-disabled="feature.disabledValidationCheckIn()"
+                                    ng-click="feature.returningPatientCheck(feature.patient.firstName, feature.patient.lastName, feature.patient.email)">Continue</button>
                         </form>
+                        <button class="btn btn-danger pull-left" ng-click="feature.reset()">Reset</button>
                     </div>
                 </div>
                 <br>
@@ -38,7 +38,6 @@
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         Please, tell us a little bit more about yourself...
-                        <button class="btn btn-danger btn-xs pull-right" ng-click="feature.reset()">Reset</button>
                     </div>
                     <div class="panel-body lilpad">
                         <form>
@@ -79,8 +78,10 @@
                                 <h4><label>Allergies</label></h4>
                                 <input type="text" class="form-control" ng-model="feature.patient.allergies">
                             </div>
-                            <button class="btn btn-primary" type="submit" ng-disabled="feature.disabledValidationPersonalInfo()" wz-next value="Continue" ng-click="feature.setEmergencyContactToPatient()">Continue</button>
+                            
+                            <button class="btn btn-primary pull-right" type="submit" ng-disabled="feature.disabledValidationPersonalInfo()" wz-next value="Continue" ng-click="feature.setEmergencyContactToPatient()">Continue</button>
                         </form>
+                        <button class="btn btn-danger pull-left" ng-click="feature.reset()">Reset</button>
                     </div>
                 </div>
             </wz-step>
@@ -88,7 +89,6 @@
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         How are you feeling today?
-                        <button class="btn btn-danger btn-xs pull-right" ng-click="feature.reset()">Reset</button>
                     </div>
                     <div class="panel-body lilpad">
                         <form>
@@ -126,8 +126,9 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <button class="btn btn-primary" type="submit" wz-next value="Continue">Continue</button>
+                            <button class="btn btn-primary pull-right" type="submit" wz-next value="Continue">Continue</button>
                         </form>
+                    <button class="btn btn-danger pull-left" ng-click="feature.reset()">Reset</button>
                     </div>
                 </div>
             </wz-step>
@@ -135,7 +136,6 @@
                 <div class="panel panel-info">
                     <div class="panel-heading">
                         Is this information correct?
-                        <button class="btn btn-danger btn-xs pull-right" ng-click="feature.reset()">Reset</button>
                     </div>
                     <div class="panel-body lilpad">
                         <div class="row">
@@ -238,7 +238,9 @@
                         </div>
                     </div>
                 </div>
-                <button class="btn btn-block btn-success" type="submit" wz-next value="Continue" ng-click="feature.writePatientToDatabase()">Yes</button>
+                <button class="btn btn-success pull-right custom" type="submit" wz-next value="Continue" ng-click="feature.writePatientToDatabase()">Yes</button>
+                <button class="btn btn-danger pull-left custom" ng-click="feature.reset()">Reset</button>
+
                 <br>
                 <br>
                 <br>
