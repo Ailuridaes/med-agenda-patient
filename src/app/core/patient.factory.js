@@ -25,7 +25,7 @@
         function addPatient(patient) {
 
 
-            return $http.post('http://localhost:61490/api/patients', patient);
+            return $http.post(apiUrl + 'patients', patient);
 
             // var defer = $q.defer();
 

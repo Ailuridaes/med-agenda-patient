@@ -17,6 +17,7 @@
         vm.disabledValidationCheckIn = disabledValidationCheckIn;
         vm.disabledValidationPersonalInfo = disabledValidationPersonalInfo;
         vm.disabledReasonForVisit = disabledReasonForVisit;
+        vm.disabledConfirm = disabledConfirm;
         vm.setEmergencyContactToPatient = setEmergencyContactToPatient;
         vm.reset = reset;
         vm.writePatientToDatabase = writePatientToDatabase;
@@ -40,12 +41,12 @@
             function(res) {
 
                 vm.isReturningPatient = res;
-                console.log(res);
                 if(res) {
-                
-                    console.log(res);
 
                     vm.patient = res;
+                    var dateInMiliSeconds = Date.parse(vm.patient.dateOfBirth);
+                    var date= new Date(dateInMiliSeconds);
+                    vm.patient.dateOfBirth = date;
                     WizardHandler.wizard().goTo('Reason for Visit');
 
                 } else {
@@ -91,6 +92,14 @@
             return !(vm.patient !== undefined && vm.patient.symptom && vm.patient.painSeverity);
         }
 
+        function disabledConfirm() {
+            return !(vm.patient !== undefined && vm.patient.firstName && vm.patient.lastName && vm.patient.email && 
+                     vm.patient.telephone && vm.patient.address && vm.patient.dateOfBirth 
+                     && vm.patient.emergencyContacts.firstName && 
+                     vm.patient.emergencyContacts.lastName && vm.patient.emergencyContacts.telephone
+                     );
+        }
+
         function reset() {
 
             vm.patient = undefined;
@@ -100,9 +109,8 @@
 
         function writePatientToDatabase() {
 
-            
-
-            if (vm.patient.patientId) {
+            if(vm.confirmForm.$valid) {
+                if (vm.patient.patientId) {
                 console.log(vm.patient.patientId);
 
                 patientFactory.updatePatient(vm.patient, vm.patient.patientId).then(
@@ -153,6 +161,9 @@
                 reset();
             }, 10000);
 
+            }
+
+            
         }
 
         
