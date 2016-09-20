@@ -34,20 +34,21 @@
        
 
 
-        function returningPatientCheck(firstName, lastName, email) {
-            
-            
+        function returningPatientCheck(firstName, lastName, email) {      
             
            patientFactory.isReturningPatient(firstName, lastName, email).then(
             function(res) {
+
                 vm.isReturningPatient = res;
+                console.log(res);
                 if(res) {
-                    
+                
+                    console.log(res);
+
                     vm.patient = res;
                     WizardHandler.wizard().goTo('Reason for Visit');
 
                 } else {
-                    
 
                     WizardHandler.wizard().goTo('Personal Info');
                 }
@@ -93,6 +94,7 @@
         function reset() {
 
             vm.patient = undefined;
+            vm.emergencyContact = undefined;
             WizardHandler.wizard().goTo('Check In');
         }
 
@@ -137,6 +139,7 @@
                 patientFactory.addPatient(patient).then(
                     function() {
                         console.log('added to database');
+
                     },
                     function(error) {
                         console.log(error);

@@ -125,6 +125,7 @@
                 function(res) {
                     defer.resolve(res.data);
                 }, function(res) {
+                    console.log(res);
                     defer.reject(res.statusText);
                 }
             );

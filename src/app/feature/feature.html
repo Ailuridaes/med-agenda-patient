@@ -22,7 +22,8 @@
                                 <label>Email</label>
                                 <input type="email" class="form-control" ng-model="feature.patient.email">
                             </div>
-                            <button class="btn btn-block btn-info" type="submit" ng-disabled="feature.disabledValidationCheckIn()" wz-next>Next</button>
+                            <button class="btn btn-block btn-info" type="submit" ng-disabled="feature.disabledValidationCheckIn()"
+                                    ng-click="feature.returningPatientCheck(feature.patient.firstName, feature.patient.lastName, feature.patient.email)">Next</button>
                         </form>
                     </div>
                 </div>
@@ -30,7 +31,8 @@
             <wz-step wz-title="Personal Info" wz-disabled="{{feature.isReturningUser}}">
                 <div class="panel panel-success">
                     <div class="panel-heading">
-                        Tell us a little bit more about yourself...
+                        Personal Info
+                        <button class="btn btn-warning btn-md pull-right" ng-click="feature.reset()">Reset</button>
                     </div>
                     <div class="panel-body">
                         <form>
@@ -80,6 +82,7 @@
                 <div class="panel panel-success">
                     <div class="panel-heading">
                         How are you feeling today?
+                        <button class="btn btn-warning btn-md pull-right" ng-click="feature.reset()">Reset</button>
                     </div>
                     <div class="panel-body">
                         <form>
@@ -125,6 +128,7 @@
                 <div class="panel panel-success">
                     <div class="panel-heading">
                         Is this information correct?
+                        <button class="btn btn-warning btn-md pull-right" ng-click="feature.reset()">Reset</button>
                     </div>
                     <div class="panel-body">
                         <div class="row">
@@ -170,7 +174,7 @@
                                 <h4>Date of Birth: </h4>
                                 <div ng-click="isEditingBirthDay = true">
                                     <p ng-hide="isEditingBirthDay">{{feature.patient.dateOfBirth}}</p>
-                                    <inputn type="date" g-show="isEditingBirthDay" ng-model="feature.patient.dateOfBirth" ng-blur="isEditingBirthDay = false">
+                                    <inputn type="datetime" g-show="isEditingBirthDay" ng-model="feature.patient.dateOfBirth" ng-blur="isEditingBirthDay = false">
                                 </div>
                             </div>
                         </div>
@@ -227,7 +231,7 @@
                         </div>
                     </div>
                 </div>
-                <button class="btn btn-block btn-info" type="submit" wz-next value="Continue">Yes</button>
+                <button class="btn btn-block btn-info" type="submit" wz-next value="Continue" ng-click="feature.writePatientToDatabase()">Yes</button>
             </wz-step>
         </wizard>
     </div>
