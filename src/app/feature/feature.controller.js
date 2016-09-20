@@ -24,6 +24,7 @@
         vm.patient.emergencyContacts = [];
         vm.emergencyContact = {};
         vm.emergencyContactsToEdit = [];
+        vm.hideIndicators = false;
 
         
 
@@ -101,7 +102,7 @@
 
         function writePatientToDatabase() {
 
-            
+            vm.hideIndicators = true;
 
             if (vm.patient.patientId) {
                 console.log(vm.patient.patientId);
@@ -152,7 +153,8 @@
             $timeout(function() {
                 console.log('timeout executing now.')
                 reset();
-            }, 10000);
+                vm.hideIndicators = false;
+            }, 5000);
 
         }
 
