@@ -5,19 +5,15 @@
         .module('app')
         .controller('FeatureController', FeatureController);
 
-    FeatureController.$inject = ['patientFactory', 'emergencyContactFactory', 'WizardHandler', '$timeout'];
+    FeatureController.$inject = ['patientFactory', 'emergencyContactFactory', 'patientCheckInFactory', 'WizardHandler', '$timeout','toastr'];
 
     /* @ngInject */
-    function FeatureController(patientFactory, emergencyContactFactory, WizardHandler, $timeout) {
+    function FeatureController(patientFactory, emergencyContactFactory, patientCheckInFactory, WizardHandler, $timeout, toastr) {
         var vm = this;
         vm.title = "Feature Controller";
         vm.returningPatientCheck = returningPatientCheck;
         vm.editECArray = editECArray;
         vm.isReturningPatient = false;
-        vm.disabledValidationCheckIn = disabledValidationCheckIn;
-        vm.disabledValidationPersonalInfo = disabledValidationPersonalInfo;
-        vm.disabledReasonForVisit = disabledReasonForVisit;
-        vm.disabledConfirm = disabledConfirm;
         vm.setEmergencyContactToPatient = setEmergencyContactToPatient;
         vm.reset = reset;
         vm.writePatientToDatabase = writePatientToDatabase;
@@ -27,37 +23,28 @@
         vm.emergencyContactsToEdit = [];
         vm.hideIndicators = false;
 
-        
-
-        vm.options = {
-            minDate: new Date(),
-            showWeeks: true
-        }
-       
-
 
         function returningPatientCheck(firstName, lastName, email) {      
-            
-           patientFactory.isReturningPatient(firstName, lastName, email).then(
-            function(res) {
+            if(vm.checkInForm.$valid){
+               patientFactory.isReturningPatient(firstName, lastName, email).then(
+                function(res) {
 
-                vm.isReturningPatient = res;
+                    vm.isReturningPatient = res;
 
-                if(res) {
+                    if(res) {
 
-                    vm.patient = res;
-                    var dateInMiliSeconds = Date.parse(vm.patient.dateOfBirth);
-                    var date= new Date(dateInMiliSeconds);
-                    vm.patient.dateOfBirth = date;
-                    WizardHandler.wizard().goTo('Reason for Visit');
+                        vm.patient = res;
+                        var dateInMiliSeconds = Date.parse(vm.patient.dateOfBirth);
+                        var date= new Date(dateInMiliSeconds);
+                        vm.patient.dateOfBirth = date;
+                        WizardHandler.wizard().goTo('Reason for Visit');
 
-                } else {
-
-                    WizardHandler.wizard().goTo('Personal Info');
-                }
-            });
-
-           
+                    } else {
+                        vm.patient.emergencyContacts = [];
+                        WizardHandler.wizard().goTo('Personal Info');
+                    }
+                });
+            }  
         }
 
 
@@ -70,6 +57,7 @@
         function setEmergencyContactToPatient() {
             
             vm.patient.emergencyContacts.push(vm.emergencyContact);
+            WizardHandler.wizard().goTo('Reason for Visit');
             
 
         } 
@@ -80,83 +68,96 @@
         }
 
 
-        //Validation for disabling buttons
-        function disabledValidationCheckIn() {
-
-            return !(vm.patient !== undefined && vm.patient.firstName && vm.patient.lastName && vm.patient.email); 
-        }
-
-        function disabledValidationPersonalInfo() {
-
-            return !(vm.patient !== undefined && vm.patient.telephone && vm.patient.address && vm.emergencyContact.firstName && vm.emergencyContact.telephone && vm.emergencyContact.lastName);
-        }
-
-        function disabledReasonForVisit() {
-            return !(vm.patient !== undefined && vm.patient.symptom && vm.patient.painSeverity);
-        }
-
-        function disabledConfirm() {
-            return !(vm.patient !== undefined && vm.patient.firstName && vm.patient.lastName && vm.patient.email && 
-                     vm.patient.telephone && vm.patient.address && vm.patient.dateOfBirth 
-                     && vm.patient.emergencyContacts.firstName && 
-                     vm.patient.emergencyContacts.lastName && vm.patient.emergencyContacts.telephone
-                     );
-        }
 
         function reset() {
 
             vm.patient = undefined;
             vm.emergencyContact = undefined;
+            vm.patientCheckIn = undefined;
             WizardHandler.wizard().reset();
+            
+        }
+
+        function addPatientCheckIn(patientCheckIn) {
+
+            patientCheckIn.checkInTime = new Date();
+            
+
+            patientCheckInFactory.addPatientCheckIn(patientCheckIn).then(
+                function(res) {
+                    
+                },
+                function(err) {
+                    
+                }
+            );
         }
 
         function writePatientToDatabase() {
 
+
+
             if(vm.confirmForm.$valid) {
+
+                WizardHandler.wizard().goTo('Success');
+                vm.hideIndicators = true;
+
                 if (vm.patient.patientId) {
-                console.log(vm.patient.patientId);
+                
 
                 patientFactory.updatePatient(vm.patient, vm.patient.patientId).then(
                     function() {
-                        console.log('added to database.');
+                        
                     }
                 );
 
                 vm.emergencyContactsToEdit.forEach(function(contact) { 
                     emergencyContactFactory.editEmergencyContact(contact, contact.emergencyContactID).then(
                         function(res) {
-                            console.log('added ec to factory');
+                            
                         },
                         function(err) {
-                            console.log('error');
+                            
                         }
                     )
 
                 });
-
-               
-
+                vm.patientCheckIn.patientId = vm.patient.patientId;
+                var patientCheckInCopy = angular.copy(vm.patientCheckIn);
+                addPatientCheckIn(patientCheckInCopy);
                 
             } else {
                 
 
                 var patient = angular.copy(vm.patient);
                 patientFactory.addPatient(patient).then(
-                    function() {
-                        console.log('added to database');
+                    function(res) {
+                        
+
+                        var patientCopy = angular.copy(vm.patientCheckIn);
+                        patientCopy.patientId = res.data.patientId;
+                        
+                        addPatientCheckIn(patientCopy);
+                        
+
 
                     },
                     function(error) {
-                        console.log(error);
+                        
                     }
                 );
             }
 
+            
+
+            
+
             $timeout(function() {
-                console.log('timeout executing now.')
+                
                 reset();
                 vm.hideIndicators = false;
             }, 5000);
+
 
             }
 

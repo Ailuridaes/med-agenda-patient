@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app', ['ui.router', 'mgo-angular-wizard'])
+        .module('app', ['ui.router', 'mgo-angular-wizard', 'toastr'])
 
         .config(function($stateProvider, $urlRouterProvider){
         	$urlRouterProvider.otherwise('/feature');

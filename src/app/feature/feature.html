@@ -9,20 +9,20 @@
                         <button class="btn btn-danger btn-xs pull-right" ng-click="feature.reset()">Reset</button>
                     </div>
                     <div class="panel-body">
-                        <form>
+                        <form name="feature.checkInForm" novalidate="true">
                             <div class="form-group">
                                 <label>First Name</label>
-                                <input type="text" class="form-control" ng-model="feature.patient.firstName">
+                                <input type="text" class="form-control" required ng-model="feature.patient.firstName">
                             </div>
                             <div class="form-group">
                                 <label>Last Name</label>
-                                <input type="text" class="form-control" ng-model="feature.patient.lastName">
+                                <input type="text" class="form-control" required ng-model="feature.patient.lastName">
                             </div>
                             <div class="form-group">
                                 <label>Email</label>
-                                <input type="email" class="form-control" ng-model="feature.patient.email">
+                                <input type="email" class="form-control" required ng-model="feature.patient.email">
                             </div>
-                            <button class="btn btn-primary" type="submit" ng-disabled="feature.disabledValidationCheckIn()"
+                            <button class="btn btn-primary" type="submit" ng-disabled="!feature.checkInForm.$valid"
                                     ng-click="feature.returningPatientCheck(feature.patient.firstName, feature.patient.lastName, feature.patient.email)">Next</button>
                         </form>
                     </div>
@@ -35,6 +35,7 @@
                 <br>
             </wz-step>
             <wz-step wz-title="Personal Info" wz-disabled="{{feature.isReturningUser}}">
+            <form name="feature.personalInfoForm" novalidate="true">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         Please, tell us a little bit more about yourself...
@@ -44,28 +45,28 @@
                         <form>
                             <div class="form-group">
                                 <h4><label>Date of Birth</label></h4>
-                                <input type="date" class="form-control" ng-model="feature.patient.dateOfBirth">
+                                <input type="date" class="form-control" required ng-model="feature.patient.dateOfBirth">
                             </div>
                             <div class="form-group">
                                 <h4><label>Telephone</label></h4>
-                                <input type="text" class="form-control" ng-model="feature.patient.telephone">
+                                <input type="text" class="form-control" required ng-model="feature.patient.telephone">
                             </div>
                             <div class="form-group">
                                 <h4><label>Address</label></h4>
-                                <input type="text" class="form-control" ng-model="feature.patient.address">
+                                <input type="text" class="form-control" required ng-model="feature.patient.address">
                             </div>
                             <h4><label>Emergency Contact</label></h4>
                             <div class="form-group col-md-offset-1">
                                 <label>First Name</label>
-                                <input type="text" class="form-control" ng-model="feature.emergencyContact.firstName">
+                                <input type="text" class="form-control" required ng-model="feature.emergencyContact.firstName">
                             </div>
                             <div class="form-group col-md-offset-1">
                                 <label>Last Name</label>
-                                <input type="text" class="form-control" ng-model="feature.emergencyContact.lastName">
+                                <input type="text" class="form-control" required ng-model="feature.emergencyContact.lastName">
                             </div>
                             <div class="form-group col-md-offset-1">
                                 <label>Telephone</label>
-                                <input type="text" class="form-control" ng-model="feature.emergencyContact.telephone">
+                                <input type="text" class="form-control" required ng-model="feature.emergencyContact.telephone">
                             </div>
                             <div class="form-group">
                                 <h4><label>Medications</label></h4>
@@ -79,22 +80,24 @@
                                 <h4><label>Allergies</label></h4>
                                 <input type="text" class="form-control" ng-model="feature.patient.allergies">
                             </div>
-                            <button class="btn btn-primary" type="submit" ng-disabled="feature.disabledValidationPersonalInfo()" ng-click="feature.setEmergencyContactToPatient()">Continue</button>
+                            <button class="btn btn-primary" type="submit" ng-disabled="!feature.personalInfoForm.$valid" ng-click="feature.setEmergencyContactToPatient()">Continue</button>
                         </form>
                     </div>
                 </div>
+            </form>
             </wz-step>
             <wz-step wz-title="Reason for Visit">
+            <form name="feature.reasonForm" novalidate="true">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         How are you feeling today?
                         <button class="btn btn-danger btn-xs pull-right" ng-click="feature.reset()">Reset</button>
                     </div>
                     <div class="panel-body lilpad">
-                        <form>
+                        
                             <div class="form-group">
                                 <label>Please select from the list all of the symptoms that you are currently experiencing</label>
-                                <select class="form-control" ng-model="feature.patient.symptom" placeholder="Symptom">
+                                <select required class="form-control" ng-model="feature.patientCheckIn.symptoms" placeholder="Symptom">
                                     <option value="Head Trauma">Head Trauma</option>
                                     <option value="Broken Bone">Broken Bone</option>
                                     <option value="Loss Of Consciousness">Loss of Consciousness</option>
@@ -105,31 +108,33 @@
                             <div>
                             <br>
                                 <label>How bad does it hurt?</label>
+                                <input type="hidden" required ng-model="feature.patientCheckIn.painScale">
                                 <table class="table">
                                     <tbody>
                                         <tr>
-                                            <td width="16%"><img class="pain-image" ng-click="feature.patient.painScale = 1" ng-src="/images/1.jpg" ng-class="{ 'selected': feature.patient.painScale === 1 }" /></td>
-                                            <td width="16%"><img class="pain-image" ng-click="feature.patient.painScale = 2" ng-src="/images/2.jpg" ng-class="{ 'selected': feature.patient.painScale === 2 }" /></td>
-                                            <td width="16%"><img class="pain-image" ng-click="feature.patient.painScale = 3" ng-src="/images/3.jpg" ng-class="{ 'selected': feature.patient.painScale === 3 }" /></td>
-                                            <td width="16%"><img class="pain-image" ng-click="feature.patient.painScale = 4" ng-src="/images/4.jpg" ng-class="{ 'selected': feature.patient.painScale === 4 }" /></td>
-                                            <td width="16%"><img class="pain-image" ng-click="feature.patient.painScale = 5" ng-src="/images/5.jpg" ng-class="{ 'selected': feature.patient.painScale === 5 }" /></td>
-                                            <td width="16%"><img class="pain-image" ng-click="feature.patient.painScale = 6" ng-src="/images/6.jpg" ng-class="{ 'selected': feature.patient.painScale === 6 }" /></td>
+                                            <td width="16%"><img class="pain-image" ng-click="feature.patientCheckIn.painScale = 1" ng-src="/images/1.jpg" ng-class="{ 'selected': feature.patientCheckIn.painScale === 1 }" /></td>
+                                            <td width="16%"><img class="pain-image" ng-click="feature.patientCheckIn.painScale = 2" ng-src="/images/2.jpg" ng-class="{ 'selected': feature.patientCheckIn.painScale === 2 }" /></td>
+                                            <td width="16%"><img class="pain-image" ng-click="feature.patientCheckIn.painScale = 3" ng-src="/images/3.jpg" ng-class="{ 'selected': feature.patientCheckIn.painScale === 3 }" /></td>
+                                            <td width="16%"><img class="pain-image" ng-click="feature.patientCheckIn.painScale = 4" ng-src="/images/4.jpg" ng-class="{ 'selected': feature.patientCheckIn.painScale === 4 }" /></td>
+                                            <td width="16%"><img class="pain-image" ng-click="feature.patientCheckIn.painScale = 5" ng-src="/images/5.jpg" ng-class="{ 'selected': feature.patientCheckIn.painScale === 5 }" /></td>
+                                            <td width="16%"><img class="pain-image" ng-click="feature.patientCheckIn.painScale = 6" ng-src="/images/6.jpg" ng-class="{ 'selected': feature.patientCheckIn.painScale === 6 }" /></td>
                                         </tr>
                                         <tr>
-                                            <td ng-class="{'strong': feature.patient.painScale === 1 }">NO HURT</td>
-                                            <td ng-class="{'strong': feature.patient.painScale === 2 }">HURTS LITTLE BIT</td>
-                                            <td ng-class="{'strong': feature.patient.painScale === 3 }">HURTS LITTLE MORE</td>
-                                            <td ng-class="{'strong': feature.patient.painScale === 4 }">HURTS EVEN MORE</td>
-                                            <td ng-class="{'strong': feature.patient.painScale === 5 }">HURTS WHOLE LOT</td>
-                                            <td ng-class="{'strong': feature.patient.painScale === 6 }">HURTS WORST</td>
+                                            <td ng-class="{'strong': feature.patientCheckIn.painScale === 1 }">NO HURT</td>
+                                            <td ng-class="{'strong': feature.patientCheckIn.painScale === 2 }">HURTS LITTLE BIT</td>
+                                            <td ng-class="{'strong': feature.patientCheckIn.painScale === 3 }">HURTS LITTLE MORE</td>
+                                            <td ng-class="{'strong': feature.patientCheckIn.painScale === 4 }">HURTS EVEN MORE</td>
+                                            <td ng-class="{'strong': feature.patientCheckIn.painScale === 5 }">HURTS WHOLE LOT</td>
+                                            <td ng-class="{'strong': feature.patientCheckIn.painScale === 6 }">HURTS WORST</td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
-                            <button class="btn btn-primary" type="submit" wz-next value="Continue">Continue</button>
+                            <button class="btn btn-primary" type="submit" ng-disabled="!feature.reasonForm.$valid" wz-next value="Continue">Continue</button>
                         </form>
                     </div>
                 </div>
+            </form>
             </wz-step>
             <wz-step wz-title="Confirm">
                 <form name="feature.confirmForm" novalidate="true">
