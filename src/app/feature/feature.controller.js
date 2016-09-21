@@ -25,6 +25,7 @@
         vm.patient.emergencyContacts = [];
         vm.emergencyContact = {};
         vm.emergencyContactsToEdit = [];
+        vm.hideIndicators = false;
 
         
 
@@ -41,6 +42,7 @@
             function(res) {
 
                 vm.isReturningPatient = res;
+
                 if(res) {
 
                     vm.patient = res;
@@ -68,6 +70,7 @@
         function setEmergencyContactToPatient() {
             
             vm.patient.emergencyContacts.push(vm.emergencyContact);
+            
 
         } 
 
@@ -138,13 +141,6 @@
                 
 
                 var patient = angular.copy(vm.patient);
-
-                //This line rights over date to prevent invalid date format from being submitted to the database
-                //Will correct by adding date time picker for birthday.
-                
-                console.log(patient);
-
-                console.log(patient)
                 patientFactory.addPatient(patient).then(
                     function() {
                         console.log('added to database');
@@ -159,7 +155,8 @@
             $timeout(function() {
                 console.log('timeout executing now.')
                 reset();
-            }, 10000);
+                vm.hideIndicators = false;
+            }, 5000);
 
             }
 

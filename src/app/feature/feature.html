@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-md-11 col-md-offset-1">
-        <wizard on-finish="finishedWizard()">
+        <wizard on-finish="finishedWizard()" hide-indicators="feature.hideIndicators" >
             <wz-step wz-title="Check In">
             <h1 class="col-md-offset-4" style="color: white;">Patient Check-In</h1>
                 <div class="panel panel-default login col-md-offset-4">
@@ -88,7 +88,7 @@
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         How are you feeling today?
-                        <button class="btn btn-warning btn-md pull-right" ng-click="feature.reset()">Reset</button>
+                        <button class="btn btn-danger btn-xs pull-right" ng-click="feature.reset()">Reset</button>
                     </div>
                     <div class="panel-body lilpad">
                         <form>
