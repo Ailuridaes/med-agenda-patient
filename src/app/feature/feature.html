@@ -147,21 +147,21 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <h4>First Name: </h4>
-                                    <div ng-click="isEditingFirst = true">
+                                    <div ng-click="isEditingFirst = true" class="editFirstName">
                                         <p ng-hide="isEditingFirst">{{feature.patient.firstName}}</p>
                                         <input ng-show="isEditingFirst" required ng-model="feature.patient.firstName" ng-blur="isEditingFirst = false">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <h4>Last Name: </h4>
-                                    <div ng-click="isEditingLast = true">
+                                    <div ng-click="isEditingLast = true" class="editLastName">
                                         <p ng-hide="isEditingLast">{{feature.patient.lastName}}</p>
                                         <input ng-show="isEditingLast" required ng-model="feature.patient.lastName" ng-blur="isEditingLast = false">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <h4>Email: </h4>
-                                    <div ng-click="isEditingEmail = true">
+                                    <div ng-click="isEditingEmail = true" class="editEmail">
                                         <p ng-hide="isEditingEmail">{{feature.patient.email}}</p>
                                         <input ng-show="isEditingEmail" required ng-model="feature.patient.email" ng-blur="isEditingEmail = false">
                                     </div>
@@ -171,21 +171,21 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <h4>Telephone: </h4>
-                                    <div ng-click="isEditingTelephone = true">
+                                    <div ng-click="isEditingTelephone = true" class="editTelephone">
                                         <p ng-hide="isEditingTelephone">{{feature.patient.telephone}}</p>
                                         <input ng-show="isEditingTelephone" required ng-model="feature.patient.telephone" ng-blur="isEditingTelephone = false">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <h4>Address: </h4>
-                                    <div ng-click="isEditingAddress = true">
+                                    <div ng-click="isEditingAddress = true" class="editAddress">
                                         <p ng-hide="isEditingAddress">{{feature.patient.address}}</p>
                                         <input ng-show="isEditingAddress" required ng-model="feature.patient.address" ng-blur="isEditingAddress = false">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <h4>Date of Birth: </h4>
-                                    <div ng-click="isEditingBirthDay = true">
+                                    <div ng-click="isEditingBirthDay = true" class="editDateOfBirth">
                                         <p ng-hide="isEditingBirthDay">{{feature.patient.dateOfBirth}}</p>
                                         <input type="date" name="dateOfBirth" ng-show="isEditingBirthDay" required ng-model="feature.patient.dateOfBirth" ng-blur="isEditingBirthDay = false">
                                     </div>
@@ -208,15 +208,15 @@
                                         </thead>
                                         <tbody>
                                             <tr ng-repeat="contact in feature.patient.emergencyContacts">
-                                                <td ng-click="isEditingECFirstName = true">
+                                                <td ng-click="isEditingECFirstName = true" class="editECFirstName">
                                                     <div ng-hide="isEditingECFirstName">{{contact.firstName}}</div>
                                                     <input type="text" ng-model="contact.firstName" required ng-show="isEditingECFirstName" ng-blur="feature.editECArray(contact); isEditingECFirstName = false">
                                                 </td>
-                                                <td ng-click="isEditingECLastName = true">
+                                                <td ng-click="isEditingECLastName = true" class="editECLastName">
                                                     <div ng-hide="isEditingECLastName">{{contact.lastName}}</div>
                                                     <input type="text" ng-model="contact.lastName" required ng-show="isEditingECLastName" ng-blur="feature.editECArray(contact); isEditingECLastName = false">
                                                 </td>
-                                                <td ng-click="isEditingECTelephone = true">
+                                                <td ng-click="isEditingECTelephone = true" class="editECTelephone">
                                                     <div ng-hide="isEditingECTelephone">{{contact.telephone}}</div>
                                                     <input type="text" ng-model="contact.telephone" required ng-show="isEditingECTelephone" ng-blur="feature.editECArray(contact); isEditingECTelephone = false">
                                                 </td>
@@ -229,14 +229,14 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <h4>Medications: </h4>
-                                    <div ng-click="isEditingMedications = true">
+                                    <div ng-click="isEditingMedications = true" class="editMedications">
                                         <p ng-hide="isEditingMedications">{{feature.patient.medications}}</p>
                                         <input ng-show="isEditingMedications" ng-model="feature.patient.medications" ng-blur="isEditingMedications = false">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <h4>Chronic Conditions: </h4>
-                                    <div ng-click="isEditingConditions = true">
+                                    <div ng-click="isEditingConditions = true" class="editChronicConditions">
                                         <p ng-hide="isEditingConditions">{{feature.patient.chronicConditions}}</p>
                                         <input ng-show="isEditingConditions" ng-model="feature.patient.chronicConditions" ng-blur="isEditingConditions = false">
                                     </div>
