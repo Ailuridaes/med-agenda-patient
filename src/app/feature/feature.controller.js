@@ -82,6 +82,23 @@
 
             patientCheckIn.checkInTime = new Date();
             
+            switch(patientCheckIn.symptoms){
+                case "Head Trauma":
+                    patientCheckIn.medicalFieldId = 6;
+                    break;
+                case "Broken Bone":
+                    patientCheckIn.medicalFieldId = 2;
+                    break;
+                case "Loss Of Consciousness":
+                    patientCheckIn.medicalFieldId = 4;
+                    break;
+                case "Fever":
+                    patientCheckIn.medicalFieldId = 8;
+                    break;
+                case "Loss Of Blood":
+                    patientCheckIn.medicalFieldId = 8;
+                    break;
+            }
 
             patientCheckInFactory.addPatientCheckIn(patientCheckIn).then(
                 function(res) {
