@@ -85,3 +85,58 @@ body {
 .custom {
 	width: 100px !important;
 }
+
+.editFirstName {
+	height: 25px;
+	width: 174px;
+}
+
+.editLastName {
+	height: 25px;
+	width: 174px;
+}
+
+.editEmail {
+	height: 25px;
+	width: 174px;
+}
+
+.editTelephone {
+	height: 25px;
+	width: 174px;
+}
+
+.editAddress {
+	height: 25px;
+	width: 174px;
+}
+
+.editDateOfBirth {
+	height: 25px;
+	width: 190px;
+}
+
+.editECFirstName {
+	height: 25px;
+	width: 174px; 
+}
+
+.editECLastName {
+	height: 25px;
+	width: 174px; 
+}
+
+.editECTelephone {
+	height: 25px;
+	width: 174px; 
+}
+
+.editMedications {
+	height: 25px;
+	width: 174px; 
+}
+
+.editChronicConditions {
+	height: 25px;
+	width: 174px; 
+}
