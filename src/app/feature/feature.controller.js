@@ -12,13 +12,16 @@
         var vm = this;
         vm.title = "Feature Controller";
         vm.returningPatientCheck = returningPatientCheck;
-        vm.editECArray = editECArray;
+        //vm.editECArray = editECArray;
         vm.isReturningPatient = false;
         vm.setEmergencyContactToPatient = setEmergencyContactToPatient;
         vm.reset = reset;
         vm.writePatientToDatabase = writePatientToDatabase;
         vm.patient = {};
-        vm.patient.emergencyContacts = [];
+        vm.patient.emergencyContacts = [{}];
+        
+
+
         vm.emergencyContact = {};
         vm.emergencyContactsToEdit = [];
         vm.hideIndicators = false;
@@ -40,7 +43,7 @@
                         WizardHandler.wizard().goTo('Reason for Visit');
 
                     } else {
-                        vm.patient.emergencyContacts = [];
+                        vm.patient.emergencyContacts = [{}];
                         WizardHandler.wizard().goTo('Personal Info');
                     }
                 });
@@ -48,15 +51,15 @@
         }
 
 
-        function editECArray(emergencyContact) {
-            vm.emergencyContactsToEdit.push(emergencyContact);
+        // function editECArray(emergencyContact) {
+        //     vm.emergencyContactsToEdit.push(emergencyContact);
 
 
-        }
+        // }
 
         function setEmergencyContactToPatient() {
             
-            vm.patient.emergencyContacts.push(vm.emergencyContact);
+            
             WizardHandler.wizard().goTo('Reason for Visit');
             
 
@@ -82,13 +85,13 @@
 
             patientCheckIn.checkInTime = new Date();
             
-
+            console.log(patientCheckIn);
             patientCheckInFactory.addPatientCheckIn(patientCheckIn).then(
                 function(res) {
                     
                 },
                 function(err) {
-                    
+                    toastr.error("It seems you are already checked in. A doctor will see you shortly.")
                 }
             );
         }
@@ -111,17 +114,20 @@
                     }
                 );
 
-                vm.emergencyContactsToEdit.forEach(function(contact) { 
-                    emergencyContactFactory.editEmergencyContact(contact, contact.emergencyContactID).then(
-                        function(res) {
-                            
-                        },
-                        function(err) {
-                            
-                        }
-                    )
+                //Change to patients.EmergencyContacts
 
-                });
+                // vm.patient.emergencyContacts.forEach(function(contact) { 
+                //     console.log(contact);
+                //     emergencyContactFactory.editEmergencyContact(contact, contact.emergencyContactID).then(
+                //         function(res) {
+                            
+                //         },
+                //         function(err) {
+                            
+                //         }
+                //     )
+
+                // });
                 vm.patientCheckIn.patientId = vm.patient.patientId;
                 var patientCheckInCopy = angular.copy(vm.patientCheckIn);
                 addPatientCheckIn(patientCheckInCopy);

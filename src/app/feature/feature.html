@@ -54,7 +54,28 @@
                                 <h4><label>Address</label></h4>
                                 <input type="text" class="form-control" required ng-model="feature.patient.address">
                             </div>
-                            <h4><label>Emergency Contact</label></h4>
+
+
+                            <h4><label>Emergency Contact <small><a  ng-click="feature.patient.emergencyContacts.push({})">(Add New Contact)</a></small></label></h4>
+                            <div class="row" ng-repeat="contact in feature.patient.emergencyContacts">
+                                <div class="form-group col-xs-3">
+                                    
+                                    <input placeholder="First Name" type="text" class="form-control" required ng-model="contact.firstName">
+                                </div>
+                                <div class="form-group col-xs-3">
+                                    
+                                    <input placeholder="Last Name" type="text" class="form-control" required ng-model="contact.lastName">
+                                </div>
+                                <div class="form-group col-xs-3">
+                                    
+                                    <input placeholder="Telephone" type="text" class="form-control" required ng-model="contact.telephone">
+                                </div>
+                                <div class="col-xs-1">
+                                    <p><button class="btn btn-danger btn-md" ng-click="feature.delete()">Delete</button></p>
+                                </div>
+                            </div>
+
+                            <!-- <h4><label>Emergency Contact</label></h4>
                             <div class="form-group col-md-offset-1">
                                 <label>First Name</label>
                                 <input type="text" class="form-control" required ng-model="feature.emergencyContact.firstName">
@@ -66,7 +87,9 @@
                             <div class="form-group col-md-offset-1">
                                 <label>Telephone</label>
                                 <input type="text" class="form-control" required ng-model="feature.emergencyContact.telephone">
-                            </div>
+                            </div> -->
+
+
                             <div class="form-group">
                                 <h4><label>Medications</label></h4>
                                 <input type="text" class="form-control" ng-model="feature.patient.medications">
@@ -209,15 +232,15 @@
                                             <tr ng-repeat="contact in feature.patient.emergencyContacts">
                                                 <td ng-click="isEditingECFirstName = true" class="editECFirstName">
                                                     <div ng-hide="isEditingECFirstName">{{contact.firstName}}</div>
-                                                    <input type="text" ng-model="contact.firstName" required ng-show="isEditingECFirstName" ng-blur="feature.editECArray(contact); isEditingECFirstName = false">
+                                                    <input type="text" ng-model="contact.firstName" required ng-show="isEditingECFirstName" ng-blur="isEditingECFirstName = false">
                                                 </td>
                                                 <td ng-click="isEditingECLastName = true" class="editECLastName">
                                                     <div ng-hide="isEditingECLastName">{{contact.lastName}}</div>
-                                                    <input type="text" ng-model="contact.lastName" required ng-show="isEditingECLastName" ng-blur="feature.editECArray(contact); isEditingECLastName = false">
+                                                    <input type="text" ng-model="contact.lastName" required ng-show="isEditingECLastName" ng-blur="isEditingECLastName = false">
                                                 </td>
                                                 <td ng-click="isEditingECTelephone = true" class="editECTelephone">
                                                     <div ng-hide="isEditingECTelephone">{{contact.telephone}}</div>
-                                                    <input type="text" ng-model="contact.telephone" required ng-show="isEditingECTelephone" ng-blur="feature.editECArray(contact); isEditingECTelephone = false">
+                                                    <input type="text" ng-model="contact.telephone" required ng-show="isEditingECTelephone" ng-blur="isEditingECTelephone = false">
                                                 </td>
                                             </tr>
                                         </tbody>
