@@ -89,19 +89,19 @@
 
             switch (patientCheckIn.symptoms) {
                 case "Head Trauma":
-                    patientCheckIn.medicalFieldId = 6;
+                    patientCheckIn.medicalFieldId = 7;
                     break;
                 case "Broken Bone":
-                    patientCheckIn.medicalFieldId = 2;
+                    patientCheckIn.medicalFieldId = 11;
                     break;
                 case "Loss Of Consciousness":
-                    patientCheckIn.medicalFieldId = 4;
+                    patientCheckIn.medicalFieldId = 8;
                     break;
                 case "Fever":
-                    patientCheckIn.medicalFieldId = 8;
+                    patientCheckIn.medicalFieldId = 23;
                     break;
                 case "Loss Of Blood":
-                    patientCheckIn.medicalFieldId = 8;
+                    patientCheckIn.medicalFieldId = 1;
                     break;
             }
 
