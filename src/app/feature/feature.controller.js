@@ -14,11 +14,12 @@
         vm.returningPatientCheck = returningPatientCheck;
         //vm.editECArray = editECArray;
         vm.isReturningPatient = false;
-        vm.setEmergencyContactToPatient = setEmergencyContactToPatient;
+        vm.goToReasonPage = goToReasonPage;
         vm.reset = reset;
         vm.writePatientToDatabase = writePatientToDatabase;
         vm.patient = {};
         vm.patient.emergencyContacts = [{}];
+        vm.deleteEmergencyContact = deleteEmergencyContact;
         
 
 
@@ -57,7 +58,7 @@
 
         // }
 
-        function setEmergencyContactToPatient() {
+        function goToReasonPage() {
             
             
             WizardHandler.wizard().goTo('Reason for Visit');
@@ -94,6 +95,19 @@
                     toastr.error("It seems you are already checked in. A doctor will see you shortly.")
                 }
             );
+        }
+
+        function deleteEmergencyContact(contact) {
+            console.log(vm.patient.emergencyContacts.indexOf(contact))
+                vm.patient.emergencyContacts.splice(vm.patient.emergencyContacts.indexOf(contact), 1);
+                if(vm.patient.emergencyContacts.length < 1) {
+                    vm.patient.emergencyContacts.push({});
+                    vm.isEditingECFirstName = true;
+                    vm.isEditingECLastName = true;
+                    vm.isEditingECTelephone = true;
+                }
+
+
         }
 
         function writePatientToDatabase() {

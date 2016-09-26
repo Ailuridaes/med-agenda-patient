@@ -48,7 +48,7 @@
                             </div>
                             <div class="form-group">
                                 <h4><label>Telephone</label></h4>
-                                <input type="text" class="form-control" required ng-model="feature.patient.telephone">
+                                <input type="text" class="form-control" name="feature.patient.telephone" required ng-value="555-555-5555" mask="(999) 999-9999" clean="true" ng-model="feature.patient.telephone">
                             </div>
                             <div class="form-group">
                                 <h4><label>Address</label></h4>
@@ -68,27 +68,14 @@
                                 </div>
                                 <div class="form-group col-xs-3">
                                     
-                                    <input placeholder="Telephone" type="text" class="form-control" required ng-model="contact.telephone">
+                                    <input placeholder="Telephone" type="text" class="form-control" required ng-model="contact.telephone" mask="(999) 999-9999" clean="true" name="contact.telephone">
                                 </div>
                                 <div class="col-xs-1">
-                                    <p><button class="btn btn-danger btn-md" ng-click="feature.delete()">Delete</button></p>
+                                    <p><button class="btn btn-danger btn-md" ng-click="feature.deleteEmergencyContact(contact)">Delete</button></p>
                                 </div>
                             </div>
 
-                            <!-- <h4><label>Emergency Contact</label></h4>
-                            <div class="form-group col-md-offset-1">
-                                <label>First Name</label>
-                                <input type="text" class="form-control" required ng-model="feature.emergencyContact.firstName">
-                            </div>
-                            <div class="form-group col-md-offset-1">
-                                <label>Last Name</label>
-                                <input type="text" class="form-control" required ng-model="feature.emergencyContact.lastName">
-                            </div>
-                            <div class="form-group col-md-offset-1">
-                                <label>Telephone</label>
-                                <input type="text" class="form-control" required ng-model="feature.emergencyContact.telephone">
-                            </div> -->
-
+                          
 
                             <div class="form-group">
                                 <h4><label>Medications</label></h4>
@@ -102,7 +89,7 @@
                                 <h4><label>Allergies</label></h4>
                                 <input type="text" class="form-control" ng-model="feature.patient.allergies">
                             </div>
-                            <button class="btn btn-primary pull-right custom" type="submit" ng-disabled="!feature.personalInfoForm.$valid" ng-click="feature.setEmergencyContactToPatient()">Continue</button>
+                            <button class="btn btn-primary pull-right custom" type="submit" ng-disabled="!feature.personalInfoForm.$valid" ng-click="feature.goToReasonPage()">Continue</button>
                         </form>
                         <button class="btn btn-danger pull-left custom" ng-click="feature.reset()">Reset</button>
                     </div>
@@ -195,7 +182,7 @@
                                     <h4>Telephone: </h4>
                                     <div ng-click="isEditingTelephone = true" class="editTelephone">
                                         <p ng-hide="isEditingTelephone">{{feature.patient.telephone}}</p>
-                                        <input ng-show="isEditingTelephone" required ng-model="feature.patient.telephone" ng-blur="isEditingTelephone = false">
+                                        <input ng-show="isEditingTelephone" mask="(999) 999-9999" name="feature.patient.telephone" required ng-model="feature.patient.telephone" clean="true" ng-blur="isEditingTelephone = false">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -208,14 +195,14 @@
                                 <div class="col-md-4">
                                     <h4>Date of Birth: </h4>
                                     <div ng-click="isEditingBirthDay = true" class="editDateOfBirth">
-                                        <p ng-hide="isEditingBirthDay">{{feature.patient.dateOfBirth}}</p>
+                                        <p ng-hide="isEditingBirthDay">{{feature.patient.dateOfBirth | date}}</p>
                                         <input type="date" name="dateOfBirth" ng-show="isEditingBirthDay" required ng-model="feature.patient.dateOfBirth" ng-blur="isEditingBirthDay = false">
                                     </div>
                                 </div>
                             </div>
                             <hr>
                             <div class="row">
-                                <h4 class="text-center">Emergency Contact Info</h4>
+                                <h4 class="text-center">Emergency Contact Info<small><a ng-click="feature.patient.emergencyContacts.push({})">(Add New Contact)</a></small></h4></label></h4>
                                 <hr>
                             </div>
                             <div class="row">
@@ -226,22 +213,24 @@
                                                 <th>First Name</th>
                                                 <th>Last Name</th>
                                                 <th>Phone Number</th>
+                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr ng-repeat="contact in feature.patient.emergencyContacts">
-                                                <td ng-click="isEditingECFirstName = true" class="editECFirstName">
-                                                    <div ng-hide="isEditingECFirstName">{{contact.firstName}}</div>
-                                                    <input type="text" ng-model="contact.firstName" required ng-show="isEditingECFirstName" ng-blur="isEditingECFirstName = false">
+                                                <td ng-click="contact.isEditingECFirstName = true" class="editECFirstName">
+                                                    <div ng-hide="contact.isEditingECFirstName">{{contact.firstName}}</div>
+                                                    <input type="text" ng-model="contact.firstName" required ng-show="contact.isEditingECFirstName" ng-blur="contact.isEditingECFirstName = false">
                                                 </td>
-                                                <td ng-click="isEditingECLastName = true" class="editECLastName">
-                                                    <div ng-hide="isEditingECLastName">{{contact.lastName}}</div>
-                                                    <input type="text" ng-model="contact.lastName" required ng-show="isEditingECLastName" ng-blur="isEditingECLastName = false">
+                                                <td ng-click="contact.isEditingECLastName = true" class="editECLastName">
+                                                    <div ng-hide="contact.isEditingECLastName">{{contact.lastName}}</div>
+                                                    <input type="text" ng-model="contact.lastName" required ng-show="contact.isEditingECLastName" ng-blur="contact.isEditingECLastName = false">
                                                 </td>
-                                                <td ng-click="isEditingECTelephone = true" class="editECTelephone">
-                                                    <div ng-hide="isEditingECTelephone">{{contact.telephone}}</div>
-                                                    <input type="text" ng-model="contact.telephone" required ng-show="isEditingECTelephone" ng-blur="isEditingECTelephone = false">
+                                                <td ng-click="contact.isEditingECTelephone = true" class="editECTelephone">
+                                                    <div ng-hide="contact.isEditingECTelephone">{{contact.telephone}}</div>
+                                                    <input type="text" ng-model="contact.telephone" name="contact.telephone" mask="(999) 999-9999" clean="true" required ng-show="contact.isEditingECTelephone" ng-blur="contact.isEditingECTelephone = false">
                                                 </td>
+                                                <td><button ng-click="feature.deleteEmergencyContact(contact)" class="btn btn-sm btn-danger">Delete</button></td>
                                             </tr>
                                         </tbody>
                                     </table>

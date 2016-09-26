@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app', ['ui.router', 'mgo-angular-wizard', 'toastr'])
+        .module('app', ['ui.router', 'mgo-angular-wizard', 'toastr', 'ngMask'])
 
         .config(function($stateProvider, $urlRouterProvider){
         	$urlRouterProvider.otherwise('/feature');
