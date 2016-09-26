@@ -5,7 +5,7 @@
         .module('app')
         .controller('FeatureController', FeatureController);
 
-    FeatureController.$inject = ['patientFactory', 'emergencyContactFactory', 'patientCheckInFactory', 'WizardHandler', '$timeout','toastr'];
+    FeatureController.$inject = ['patientFactory', 'emergencyContactFactory', 'patientCheckInFactory', 'WizardHandler', '$timeout', 'toastr'];
 
     /* @ngInject */
     function FeatureController(patientFactory, emergencyContactFactory, patientCheckInFactory, WizardHandler, $timeout, toastr) {
@@ -28,27 +28,27 @@
         vm.hideIndicators = false;
 
 
-        function returningPatientCheck(firstName, lastName, email) {      
-            if(vm.checkInForm.$valid){
-               patientFactory.isReturningPatient(firstName, lastName, email).then(
-                function(res) {
+        function returningPatientCheck(firstName, lastName, email) {
+            if (vm.checkInForm.$valid) {
+                patientFactory.isReturningPatient(firstName, lastName, email).then(
+                    function(res) {
 
-                    vm.isReturningPatient = res;
+                        vm.isReturningPatient = res;
 
-                    if(res) {
+                        if (res) {
 
-                        vm.patient = res;
-                        var dateInMiliSeconds = Date.parse(vm.patient.dateOfBirth);
-                        var date= new Date(dateInMiliSeconds);
-                        vm.patient.dateOfBirth = date;
-                        WizardHandler.wizard().goTo('Reason for Visit');
+                            vm.patient = res;
+                            var dateInMiliSeconds = Date.parse(vm.patient.dateOfBirth);
+                            var date = new Date(dateInMiliSeconds);
+                            vm.patient.dateOfBirth = date;
+                            WizardHandler.wizard().goTo('Reason for Visit');
 
-                    } else {
-                        vm.patient.emergencyContacts = [{}];
-                        WizardHandler.wizard().goTo('Personal Info');
-                    }
-                });
-            }  
+                        } else {
+                            vm.patient.emergencyContacts = [{}];
+                            WizardHandler.wizard().goTo('Personal Info');
+                        }
+                    });
+            }
         }
 
 
@@ -59,12 +59,12 @@
         // }
 
         function goToReasonPage() {
-            
-            
-            WizardHandler.wizard().goTo('Reason for Visit');
-            
 
-        } 
+
+            WizardHandler.wizard().goTo('Reason for Visit');
+
+
+        }
 
         function beforeRender($view, $dates, $leftDate, $upDate, $rightDate) {
             var index = Math.floor(Math.random() * $dates.length);
@@ -79,33 +79,51 @@
             vm.emergencyContact = undefined;
             vm.patientCheckIn = undefined;
             WizardHandler.wizard().reset();
-            
+
         }
 
         function addPatientCheckIn(patientCheckIn) {
 
             patientCheckIn.checkInTime = new Date();
-            
-            console.log(patientCheckIn);
+
+
+            switch (patientCheckIn.symptoms) {
+                case "Head Trauma":
+                    patientCheckIn.medicalFieldId = 6;
+                    break;
+                case "Broken Bone":
+                    patientCheckIn.medicalFieldId = 2;
+                    break;
+                case "Loss Of Consciousness":
+                    patientCheckIn.medicalFieldId = 4;
+                    break;
+                case "Fever":
+                    patientCheckIn.medicalFieldId = 8;
+                    break;
+                case "Loss Of Blood":
+                    patientCheckIn.medicalFieldId = 8;
+                    break;
+            }
+
             patientCheckInFactory.addPatientCheckIn(patientCheckIn).then(
                 function(res) {
-                    
+
                 },
                 function(err) {
-                    toastr.error("It seems you are already checked in. A doctor will see you shortly.")
+                    toastr.warning("It seems you are already checked in. A doctor will see you shortly.")
                 }
             );
         }
 
         function deleteEmergencyContact(contact) {
             console.log(vm.patient.emergencyContacts.indexOf(contact))
-                vm.patient.emergencyContacts.splice(vm.patient.emergencyContacts.indexOf(contact), 1);
-                if(vm.patient.emergencyContacts.length < 1) {
-                    vm.patient.emergencyContacts.push({});
-                    vm.isEditingECFirstName = true;
-                    vm.isEditingECLastName = true;
-                    vm.isEditingECTelephone = true;
-                }
+            vm.patient.emergencyContacts.splice(vm.patient.emergencyContacts.indexOf(contact), 1);
+            if (vm.patient.emergencyContacts.length < 1) {
+                vm.patient.emergencyContacts.push({});
+                vm.isEditingECFirstName = true;
+                vm.isEditingECLastName = true;
+                vm.isEditingECTelephone = true;
+            }
 
 
         }
@@ -114,76 +132,76 @@
 
 
 
-            if(vm.confirmForm.$valid) {
+            if (vm.confirmForm.$valid) {
 
                 WizardHandler.wizard().goTo('Success');
                 vm.hideIndicators = true;
 
                 if (vm.patient.patientId) {
-                
-
-                patientFactory.updatePatient(vm.patient, vm.patient.patientId).then(
-                    function() {
-                        
-                    }
-                );
-
-                //Change to patients.EmergencyContacts
-
-                // vm.patient.emergencyContacts.forEach(function(contact) { 
-                //     console.log(contact);
-                //     emergencyContactFactory.editEmergencyContact(contact, contact.emergencyContactID).then(
-                //         function(res) {
-                            
-                //         },
-                //         function(err) {
-                            
-                //         }
-                //     )
-
-                // });
-                vm.patientCheckIn.patientId = vm.patient.patientId;
-                var patientCheckInCopy = angular.copy(vm.patientCheckIn);
-                addPatientCheckIn(patientCheckInCopy);
-                
-            } else {
-                
-
-                var patient = angular.copy(vm.patient);
-                patientFactory.addPatient(patient).then(
-                    function(res) {
-                        
-
-                        var patientCopy = angular.copy(vm.patientCheckIn);
-                        patientCopy.patientId = res.data.patientId;
-                        
-                        addPatientCheckIn(patientCopy);
-                        
 
 
-                    },
-                    function(error) {
-                        
-                    }
-                );
+                    patientFactory.updatePatient(vm.patient, vm.patient.patientId).then(
+                        function() {
+
+                        }
+                    );
+
+                    //Change to patients.EmergencyContacts
+
+                    // vm.patient.emergencyContacts.forEach(function(contact) { 
+                    //     console.log(contact);
+                    //     emergencyContactFactory.editEmergencyContact(contact, contact.emergencyContactID).then(
+                    //         function(res) {
+
+                    //         },
+                    //         function(err) {
+
+                    //         }
+                    //     )
+
+                    // });
+                    vm.patientCheckIn.patientId = vm.patient.patientId;
+                    var patientCheckInCopy = angular.copy(vm.patientCheckIn);
+                    addPatientCheckIn(patientCheckInCopy);
+
+                } else {
+
+
+                    var patient = angular.copy(vm.patient);
+                    patientFactory.addPatient(patient).then(
+                        function(res) {
+
+
+                            var patientCopy = angular.copy(vm.patientCheckIn);
+                            patientCopy.patientId = res.data.patientId;
+
+                            addPatientCheckIn(patientCopy);
+
+
+
+                        },
+                        function(error) {
+
+                        }
+                    );
+                }
+
+
+
+
+
+                $timeout(function() {
+
+                    reset();
+                    vm.hideIndicators = false;
+                }, 5000);
+
+
             }
 
-            
 
-            
-
-            $timeout(function() {
-                
-                reset();
-                vm.hideIndicators = false;
-            }, 5000);
-
-
-            }
-
-            
         }
 
-        
+
     }
 })();

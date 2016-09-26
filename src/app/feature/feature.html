@@ -22,7 +22,7 @@
                                 <input type="email" class="form-control" required ng-model="feature.patient.email">
                             </div>
                             <button class="btn btn-primary pull-right custom" type="submit" ng-disabled="!feature.checkInForm.$valid"
-                                    ng-click="feature.returningPatientCheck(feature.patient.firstName, feature.patient.lastName, feature.patient.email)">Next</button>
+                                    ng-click="feature.returningPatientCheck(feature.patient.firstName, feature.patient.lastName, feature.patient.email)">Continue</button>
                         </form>
                         <button class="btn btn-danger pull-left custom" ng-click="feature.reset()">Reset</button>
                     </div>
@@ -48,7 +48,7 @@
                             </div>
                             <div class="form-group">
                                 <h4><label>Telephone</label></h4>
-                                <input type="text" class="form-control" name="feature.patient.telephone" required ng-value="555-555-5555" mask="(999) 999-9999" clean="true" ng-model="feature.patient.telephone">
+                                <input type="text" class="form-control" name="feature.patient.telephone" required  mask="(999) 999-9999" clean="true" ng-model="feature.patient.telephone">
                             </div>
                             <div class="form-group">
                                 <h4><label>Address</label></h4>
@@ -110,7 +110,7 @@
                                     <option value="Head Trauma">Head Trauma</option>
                                     <option value="Broken Bone">Broken Bone</option>
                                     <option value="Loss Of Consciousness">Loss of Consciousness</option>
-                                    <option value="fever">Fever</option>
+                                    <option value="Fever">Fever</option>
                                     <option value="Loss Of Blood">Loss Of Blood</option>
                                 </select>
                             </div>
@@ -182,7 +182,7 @@
                                     <h4>Telephone: </h4>
                                     <div ng-click="isEditingTelephone = true" class="editTelephone">
                                         <p ng-hide="isEditingTelephone">{{feature.patient.telephone}}</p>
-                                        <input ng-show="isEditingTelephone" mask="(999) 999-9999" name="feature.patient.telephone" required ng-model="feature.patient.telephone" clean="true" ng-blur="isEditingTelephone = false">
+                                        <input ng-show="isEditingTelephone" mask="(999) 999-9999" name="feature.patient.telephone"  ng-model="feature.patient.telephone" clean="true" validate="false" ng-blur="isEditingTelephone = false">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -228,7 +228,7 @@
                                                 </td>
                                                 <td ng-click="contact.isEditingECTelephone = true" class="editECTelephone">
                                                     <div ng-hide="contact.isEditingECTelephone">{{contact.telephone}}</div>
-                                                    <input type="text" ng-model="contact.telephone" name="contact.telephone" mask="(999) 999-9999" clean="true" required ng-show="contact.isEditingECTelephone" ng-blur="contact.isEditingECTelephone = false">
+                                                    <input type="text" ng-model="contact.telephone" name="contact.telephone" mask="(999) 999-9999" validate="false" clean="true" ng-show="contact.isEditingECTelephone" ng-blur="contact.isEditingECTelephone = false">
                                                 </td>
                                                 <td><button ng-click="feature.deleteEmergencyContact(contact)" class="btn btn-sm btn-danger">Delete</button></td>
                                             </tr>
@@ -258,6 +258,7 @@
                     <button class="btn btn-success pull-right custom" ng-disabled="!feature.confirmForm.$valid" type="submit"
                             ng-click="feature.writePatientToDatabase()">Yes</button>
                     <button class="btn btn-danger pull-left custom" ng-click="feature.reset()">Reset</button>
+                  
                     <br>
                     <br>
                     <br>
